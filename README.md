@@ -23,11 +23,12 @@ Esta estructura permite organizar la información y relacionar los datos necesar
 
 El siguiente diagrama representa visualmente los modelos y las relaciones entre ellos.
 
-![Diagrama entidad-relación de AnimeAccess](DiagramaER/DiagramaER-AniAccess.png)
+![Diagrama entidad-relación de AnimeAccess](AniAccess/DiagramaER/DiagramaER-AniAccess.png)
 
 *Figura 1. Diagrama entidad-relación de la base de datos de AnimeAccess.*
 
-> **Importante:** la ruta de la imagen es relativa al archivo `README.md`. Si esta documentación está en una subcarpeta, ajusta la ruta para que apunte a `DiagramaER/DiagramaER-AniAccess.png` desde ese archivo.
+> **Importante:** la ruta de la imagen es relativa al archivo `README.md`. Si esta documentación está en una subcarpeta, ajusta la ruta para que apunte a `` desde ese archivo.
+
 
 ## 📊 Resumen de los modelos
 
