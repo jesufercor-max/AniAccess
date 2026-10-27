@@ -1,8 +1,8 @@
-# 🎌 AnimeAccess — Modelos de la base de datos
+# AnimeAccess — Modelos de la base de datos
 
 > Documentación de los 12 modelos Django de **AnimeAccess**, una plataforma orientada a consultar la disponibilidad del anime y sus características de accesibilidad.
 
-## 📑 Índice
+## Índice
 
 1. [Introducción](#-introducción)
 2. [Diagrama entidad-relación](#-diagrama-entidad-relación)
@@ -13,13 +13,13 @@
 
 ---
 
-## 🎯 Introducción
+## Introducción
 
 La base de datos de AnimeAccess está organizada en **12 modelos**. Cada modelo representa un elemento de la aplicación, como los animes, las plataformas de streaming, los usuarios, las preferencias de accesibilidad o las colaboraciones de voluntariado.
 
 Esta estructura permite organizar la información y relacionar los datos necesarios para consultar la accesibilidad del anime, valorar la experiencia y colaborar en la mejora de los recursos accesibles.
 
-## 🗺️ Diagrama entidad-relación
+## Diagrama entidad-relación
 
 El siguiente diagrama representa visualmente los modelos y las relaciones entre ellos.
 
@@ -30,7 +30,7 @@ El siguiente diagrama representa visualmente los modelos y las relaciones entre 
 > **Importante:** la ruta de la imagen es relativa al archivo `README.md`. Si esta documentación está en una subcarpeta, ajusta la ruta para que apunte a `` desde ese archivo.
 
 
-## 📊 Resumen de los modelos
+## Resumen de los modelos
 
 | N.º | Modelo | ¿Para qué sirve? |
 |---:|---|---|
@@ -49,7 +49,7 @@ El siguiente diagrama representa visualmente los modelos y las relaciones entre 
 
 ---
 
-## 🧩 Descripción detallada de los modelos
+## Descripción detallada de los modelos
 
 ### 1. `Anime` — Catálogo de anime
 
@@ -184,7 +184,7 @@ La relación con `Voluntario` es de muchos a muchos: una insignia puede correspo
 
 ---
 
-## 🔗 Relaciones principales
+## Relaciones principales
 
 | Relación | Tipo | Explicación |
 |---|---|---|
@@ -210,7 +210,7 @@ La relación con `Voluntario` es de muchos a muchos: una insignia puede correspo
 
 ---
 
-## 🧰 Tipos de campos utilizados
+## Tipos de campos utilizados
 
 | Campo Django | Uso en AnimeAccess |
 |---|---|
@@ -246,6 +246,10 @@ La relación con `Voluntario` es de muchos a muchos: una insignia puede correspo
 
 ---
 
-## ✅ Conclusión
+## Conclusión
 
 Los 12 modelos de AnimeAccess separan la información del catálogo, la disponibilidad en plataformas, la accesibilidad, las cuentas de usuario, las valoraciones y el voluntariado. Las relaciones entre ellos permiten mantener los datos organizados y facilitar la ampliación futura de la aplicación.
+
+## Instalación necesaria para las fotos
+
+Para poder usar correctamente el `upload_to = " "` se debe hacer la instalacion de la libreria Pillow con un `python -m pip install Pillow`
