@@ -1,0 +1,1338 @@
+[
+    {
+        "model": "AniAccess.idioma",
+        "pk": 1,
+        "fields": {
+            "nombre": "Español",
+            "codigo": "es",
+            "descripcion": "Idioma Español disponible en AnimeAccess.",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 2,
+        "fields": {
+            "nombre": "Inglés",
+            "codigo": "en",
+            "descripcion": "Idioma Inglés disponible en AnimeAccess.",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 3,
+        "fields": {
+            "nombre": "Japonés",
+            "codigo": "ja",
+            "descripcion": "Idioma Japonés disponible en AnimeAccess.",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 4,
+        "fields": {
+            "nombre": "Francés",
+            "codigo": "fr",
+            "descripcion": "Idioma Francés disponible en AnimeAccess.",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 5,
+        "fields": {
+            "nombre": "Alemán",
+            "codigo": "de",
+            "descripcion": "Idioma Alemán disponible en AnimeAccess.",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 6,
+        "fields": {
+            "nombre": "Portugués",
+            "codigo": "pt",
+            "descripcion": "Idioma Portugués disponible en AnimeAccess.",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 1,
+        "fields": {
+            "nombre": "Visual",
+            "descripcion": "Necesidades relacionadas con la discapacidad visual.",
+            "icono": "fa-eye",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 2,
+        "fields": {
+            "nombre": "Auditiva",
+            "descripcion": "Necesidades relacionadas con la discapacidad auditiva.",
+            "icono": "fa-ear-deaf",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 3,
+        "fields": {
+            "nombre": "Motora",
+            "descripcion": "Necesidades relacionadas con la movilidad.",
+            "icono": "fa-wheelchair",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 4,
+        "fields": {
+            "nombre": "Cognitiva",
+            "descripcion": "Necesidades relacionadas con la comprensión y la atención.",
+            "icono": "fa-brain",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 5,
+        "fields": {
+            "nombre": "Dislexia",
+            "descripcion": "Necesidades relacionadas con la dificultad de lectura.",
+            "icono": "fa-book-open",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 1,
+        "fields": {
+            "nombre": "Primera colaboración",
+            "descripcion": "Completaste tu primera colaboración.",
+            "icono": null,
+            "puntos_necesarios": 0,
+            "colaboraciones_necesarias": 1,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 2,
+        "fields": {
+            "nombre": "Experto en subtítulos",
+            "descripcion": "Has creado subtítulos accesibles de calidad.",
+            "icono": null,
+            "puntos_necesarios": 100,
+            "colaboraciones_necesarias": 5,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 3,
+        "fields": {
+            "nombre": "Especialista en audio",
+            "descripcion": "Has realizado varias audiodescripciones.",
+            "icono": null,
+            "puntos_necesarios": 200,
+            "colaboraciones_necesarias": 8,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 4,
+        "fields": {
+            "nombre": "Revisor de accesibilidad",
+            "descripcion": "Has revisado el trabajo de otros voluntarios.",
+            "icono": null,
+            "puntos_necesarios": 150,
+            "colaboraciones_necesarias": 6,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 5,
+        "fields": {
+            "nombre": "Embajador AnimeAccess",
+            "descripcion": "Reconocimiento a los voluntarios más activos.",
+            "icono": null,
+            "puntos_necesarios": 500,
+            "colaboraciones_necesarias": 20,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 1,
+        "fields": {
+            "nombre": "Crunchyroll",
+            "descripcion": "Plataforma especializada en anime con simulcast.",
+            "web": "https://www.crunchyroll.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 2,
+        "fields": {
+            "nombre": "Netflix",
+            "descripcion": "Plataforma de streaming con catálogo de anime.",
+            "web": "https://www.netflix.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 3,
+        "fields": {
+            "nombre": "Prime Video",
+            "descripcion": "Servicio de streaming de Amazon.",
+            "web": "https://www.primevideo.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 4,
+        "fields": {
+            "nombre": "Disney+",
+            "descripcion": "Plataforma de streaming de Disney.",
+            "web": "https://www.disneyplus.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 5,
+        "fields": {
+            "nombre": "HIDIVE",
+            "descripcion": "Plataforma de anime con títulos exclusivos.",
+            "web": "https://www.hidive.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 1,
+        "fields": {
+            "nombre_usuario": "akira_san",
+            "email": "akira@example.com",
+            "fecha_registro": "2025-02-10T10:00:00Z",
+            "fecha_nacimiento": "1998-03-14",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 2,
+        "fields": {
+            "nombre_usuario": "sakura92",
+            "email": "sakura@example.com",
+            "fecha_registro": "2025-03-10T10:00:00Z",
+            "fecha_nacimiento": "1992-07-22",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 3,
+        "fields": {
+            "nombre_usuario": "naruto_fan",
+            "email": "naruto@example.com",
+            "fecha_registro": "2025-04-10T10:00:00Z",
+            "fecha_nacimiento": "2001-11-05",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 4,
+        "fields": {
+            "nombre_usuario": "luna_otaku",
+            "email": "luna@example.com",
+            "fecha_registro": "2025-05-10T10:00:00Z",
+            "fecha_nacimiento": "1995-01-30",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 5,
+        "fields": {
+            "nombre_usuario": "kenji_dev",
+            "email": "kenji@example.com",
+            "fecha_registro": "2025-06-10T10:00:00Z",
+            "fecha_nacimiento": "1989-09-12",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 6,
+        "fields": {
+            "nombre_usuario": "mika_sub",
+            "email": "mika@example.com",
+            "fecha_registro": "2025-07-10T10:00:00Z",
+            "fecha_nacimiento": "2000-05-18",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 7,
+        "fields": {
+            "nombre_usuario": "hiro_audio",
+            "email": "hiro@example.com",
+            "fecha_registro": "2025-08-10T10:00:00Z",
+            "fecha_nacimiento": "1997-12-02",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 8,
+        "fields": {
+            "nombre_usuario": "yuki_sign",
+            "email": "yuki@example.com",
+            "fecha_registro": "2025-09-10T10:00:00Z",
+            "fecha_nacimiento": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 1,
+        "fields": {
+            "titulo": "Fullmetal Alchemist: Brotherhood",
+            "titulo_original": "Fullmetal Alchemist: Brotherhood",
+            "sinopsis": "Dos hermanos buscan la piedra filosofal para recuperar sus cuerpos tras un intento fallido de alquimia.",
+            "anio_estreno": 2009,
+            "num_episodios": 64,
+            "tipo": "Serie",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                1,
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 2,
+        "fields": {
+            "titulo": "Your Name",
+            "titulo_original": "Kimi no Na wa.",
+            "sinopsis": "Dos adolescentes intercambian sus cuerpos de forma misteriosa y buscan encontrarse.",
+            "anio_estreno": 2016,
+            "num_episodios": 1,
+            "tipo": "Película",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                2,
+                5
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 3,
+        "fields": {
+            "titulo": "Attack on Titan",
+            "titulo_original": "Shingeki no Kyojin",
+            "sinopsis": "La humanidad vive tras enormes muros para protegerse de unos gigantes devoradores.",
+            "anio_estreno": 2013,
+            "num_episodios": 87,
+            "tipo": "Serie",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                1,
+                4,
+                6
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 4,
+        "fields": {
+            "titulo": "Demon Slayer",
+            "titulo_original": "Kimetsu no Yaiba",
+            "sinopsis": "Tanjiro se convierte en cazador de demonios para salvar a su hermana.",
+            "anio_estreno": 2019,
+            "num_episodios": 44,
+            "tipo": "Serie",
+            "estado": "En emisión",
+            "imagen": null,
+            "usuarios_favoritos": [
+                3,
+                7
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 5,
+        "fields": {
+            "titulo": "A Silent Voice",
+            "titulo_original": "Koe no Katachi",
+            "sinopsis": "Un joven intenta redimirse con una compañera sorda a la que acosó en la escuela.",
+            "anio_estreno": 2016,
+            "num_episodios": 1,
+            "tipo": "Película",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                1,
+                2,
+                5
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 6,
+        "fields": {
+            "titulo": "Spirited Away",
+            "titulo_original": "Sen to Chihiro no Kamikakushi",
+            "sinopsis": "Una niña queda atrapada en un mundo de espíritus y debe trabajar en unos baños.",
+            "anio_estreno": 2001,
+            "num_episodios": 1,
+            "tipo": "Película",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                2,
+                6
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 7,
+        "fields": {
+            "titulo": "One Piece",
+            "titulo_original": "One Piece",
+            "sinopsis": "Luffy y su tripulación navegan en busca del tesoro definitivo.",
+            "anio_estreno": 1999,
+            "num_episodios": 1100,
+            "tipo": "Serie",
+            "estado": "En emisión",
+            "imagen": null,
+            "usuarios_favoritos": [
+                4,
+                8
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 8,
+        "fields": {
+            "titulo": "Cowboy Bebop",
+            "titulo_original": "Cowboy Bebop",
+            "sinopsis": "Un grupo de cazarrecompensas viaja por el sistema solar a bordo de una nave.",
+            "anio_estreno": 1998,
+            "num_episodios": 26,
+            "tipo": "Serie",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                3,
+                5,
+                7
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 1,
+        "fields": {
+            "anime": 1,
+            "plataforma": 1,
+            "idioma": 2,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 2,
+        "fields": {
+            "anime": 1,
+            "plataforma": 1,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 3,
+        "fields": {
+            "anime": 1,
+            "plataforma": 2,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 4,
+        "fields": {
+            "anime": 2,
+            "plataforma": 2,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 5,
+        "fields": {
+            "anime": 2,
+            "plataforma": 3,
+            "idioma": 3,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 6,
+        "fields": {
+            "anime": 3,
+            "plataforma": 1,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 7,
+        "fields": {
+            "anime": 3,
+            "plataforma": 5,
+            "idioma": 2,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 8,
+        "fields": {
+            "anime": 4,
+            "plataforma": 1,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 9,
+        "fields": {
+            "anime": 4,
+            "plataforma": 1,
+            "idioma": 3,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 10,
+        "fields": {
+            "anime": 5,
+            "plataforma": 2,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 11,
+        "fields": {
+            "anime": 6,
+            "plataforma": 4,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 12,
+        "fields": {
+            "anime": 7,
+            "plataforma": 1,
+            "idioma": 2,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 13,
+        "fields": {
+            "anime": 7,
+            "plataforma": 2,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 14,
+        "fields": {
+            "anime": 8,
+            "plataforma": 3,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2024-01-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 1,
+        "fields": {
+            "anime": 1,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": false,
+            "descripcion_sonidos": false,
+            "lengua_signos": false,
+            "doblaje": false,
+            "contraste_visual": true,
+            "observaciones": "Ficha de accesibilidad del anime Fullmetal Alchemist: Brotherhood.",
+            "tipos_discapacidad": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 2,
+        "fields": {
+            "anime": 2,
+            "subtitulos_accesibles": false,
+            "audiodescripcion": false,
+            "descripcion_sonidos": true,
+            "lengua_signos": false,
+            "doblaje": true,
+            "contraste_visual": true,
+            "observaciones": "Ficha de accesibilidad del anime Your Name.",
+            "tipos_discapacidad": [
+                2,
+                5
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 3,
+        "fields": {
+            "anime": 3,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": true,
+            "descripcion_sonidos": false,
+            "lengua_signos": false,
+            "doblaje": false,
+            "contraste_visual": true,
+            "observaciones": "Ficha de accesibilidad del anime Attack on Titan.",
+            "tipos_discapacidad": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 4,
+        "fields": {
+            "anime": 4,
+            "subtitulos_accesibles": false,
+            "audiodescripcion": false,
+            "descripcion_sonidos": true,
+            "lengua_signos": false,
+            "doblaje": true,
+            "contraste_visual": false,
+            "observaciones": "Ficha de accesibilidad del anime Demon Slayer.",
+            "tipos_discapacidad": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 5,
+        "fields": {
+            "anime": 5,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": false,
+            "descripcion_sonidos": false,
+            "lengua_signos": true,
+            "doblaje": false,
+            "contraste_visual": true,
+            "observaciones": "Ficha de accesibilidad del anime A Silent Voice.",
+            "tipos_discapacidad": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 6,
+        "fields": {
+            "anime": 6,
+            "subtitulos_accesibles": false,
+            "audiodescripcion": true,
+            "descripcion_sonidos": true,
+            "lengua_signos": true,
+            "doblaje": true,
+            "contraste_visual": true,
+            "observaciones": "Ficha de accesibilidad del anime Spirited Away.",
+            "tipos_discapacidad": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 7,
+        "fields": {
+            "anime": 7,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": false,
+            "descripcion_sonidos": false,
+            "lengua_signos": false,
+            "doblaje": false,
+            "contraste_visual": true,
+            "observaciones": "Ficha de accesibilidad del anime One Piece.",
+            "tipos_discapacidad": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 8,
+        "fields": {
+            "anime": 8,
+            "subtitulos_accesibles": false,
+            "audiodescripcion": false,
+            "descripcion_sonidos": true,
+            "lengua_signos": false,
+            "doblaje": true,
+            "contraste_visual": false,
+            "observaciones": "Ficha de accesibilidad del anime Cowboy Bebop.",
+            "tipos_discapacidad": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 1,
+        "fields": {
+            "usuario": 1,
+            "descripcion": "Preferencias de accesibilidad de akira_san.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": true,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": false,
+            "tipos_discapacidad": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 2,
+        "fields": {
+            "usuario": 2,
+            "descripcion": "Preferencias de accesibilidad de sakura92.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": false,
+            "preferencia_lengua_signos": true,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": true,
+            "tipos_discapacidad": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 3,
+        "fields": {
+            "usuario": 3,
+            "descripcion": "Preferencias de accesibilidad de naruto_fan.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": true,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": true,
+            "preferencia_descripcion_sonidos": false,
+            "tipos_discapacidad": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 4,
+        "fields": {
+            "usuario": 4,
+            "descripcion": "Preferencias de accesibilidad de luna_otaku.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": false,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": true,
+            "tipos_discapacidad": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 5,
+        "fields": {
+            "usuario": 5,
+            "descripcion": "Preferencias de accesibilidad de kenji_dev.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": true,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": false,
+            "tipos_discapacidad": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 6,
+        "fields": {
+            "usuario": 6,
+            "descripcion": "Preferencias de accesibilidad de mika_sub.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": false,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": true,
+            "preferencia_descripcion_sonidos": true,
+            "tipos_discapacidad": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 7,
+        "fields": {
+            "usuario": 7,
+            "descripcion": "Preferencias de accesibilidad de hiro_audio.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": true,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": false,
+            "tipos_discapacidad": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 8,
+        "fields": {
+            "usuario": 8,
+            "descripcion": "Preferencias de accesibilidad de yuki_sign.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": false,
+            "preferencia_lengua_signos": true,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": true,
+            "tipos_discapacidad": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 1,
+        "fields": {
+            "usuario": 1,
+            "anime": 1,
+            "puntuacion": 5,
+            "comentario": "Muy buena accesibilidad.",
+            "fecha": "2025-06-11T12:00:00Z",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 4,
+            "accesibilidad_general": 5,
+            "precision_accesibilidad": "4.75",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 2,
+        "fields": {
+            "usuario": 2,
+            "anime": 1,
+            "puntuacion": 4,
+            "comentario": "Subtítulos claros.",
+            "fecha": "2025-06-12T12:00:00Z",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 3,
+            "accesibilidad_general": 4,
+            "precision_accesibilidad": "4.00",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 3,
+        "fields": {
+            "usuario": 2,
+            "anime": 2,
+            "puntuacion": 5,
+            "comentario": "Preciosa y accesible.",
+            "fecha": "2025-06-13T12:00:00Z",
+            "subtitulos_valoracion": 4,
+            "audio_valoracion": 4,
+            "accesibilidad_general": 4,
+            "precision_accesibilidad": "4.25",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 4,
+        "fields": {
+            "usuario": 3,
+            "anime": 3,
+            "puntuacion": 4,
+            "comentario": "Buen doblaje.",
+            "fecha": "2025-06-14T12:00:00Z",
+            "subtitulos_valoracion": 3,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 4,
+            "precision_accesibilidad": "3.80",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 5,
+        "fields": {
+            "usuario": 4,
+            "anime": 4,
+            "puntuacion": 5,
+            "comentario": "Imagen y sonido excelentes.",
+            "fecha": "2025-06-15T12:00:00Z",
+            "subtitulos_valoracion": 4,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 5,
+            "precision_accesibilidad": "4.60",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 6,
+        "fields": {
+            "usuario": 5,
+            "anime": 5,
+            "puntuacion": 5,
+            "comentario": "Gran trabajo de accesibilidad.",
+            "fecha": "2025-06-16T12:00:00Z",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 5,
+            "precision_accesibilidad": "5.00",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 7,
+        "fields": {
+            "usuario": 6,
+            "anime": 5,
+            "puntuacion": 4,
+            "comentario": "Falta lengua de signos.",
+            "fecha": "2025-06-17T12:00:00Z",
+            "subtitulos_valoracion": 4,
+            "audio_valoracion": 4,
+            "accesibilidad_general": 3,
+            "precision_accesibilidad": "3.50",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 8,
+        "fields": {
+            "usuario": 7,
+            "anime": 6,
+            "puntuacion": 5,
+            "comentario": "Clásico con buenos subtítulos.",
+            "fecha": "2025-06-18T12:00:00Z",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 4,
+            "accesibilidad_general": 4,
+            "precision_accesibilidad": "4.40",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 9,
+        "fields": {
+            "usuario": 8,
+            "anime": 7,
+            "puntuacion": 3,
+            "comentario": "Subtítulos mejorables.",
+            "fecha": "2025-06-19T12:00:00Z",
+            "subtitulos_valoracion": 2,
+            "audio_valoracion": 3,
+            "accesibilidad_general": 3,
+            "precision_accesibilidad": "2.80",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 10,
+        "fields": {
+            "usuario": 1,
+            "anime": 8,
+            "puntuacion": 4,
+            "comentario": "Buen audio.",
+            "fecha": "2025-06-20T12:00:00Z",
+            "subtitulos_valoracion": 4,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 4,
+            "precision_accesibilidad": "4.10",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 11,
+        "fields": {
+            "usuario": 3,
+            "anime": 2,
+            "puntuacion": 5,
+            "comentario": "Muy recomendable.",
+            "fecha": "2025-06-21T12:00:00Z",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 5,
+            "precision_accesibilidad": "4.90",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 12,
+        "fields": {
+            "usuario": 5,
+            "anime": 3,
+            "puntuacion": 4,
+            "comentario": "Correcta.",
+            "fecha": "2025-06-22T12:00:00Z",
+            "subtitulos_valoracion": 4,
+            "audio_valoracion": 4,
+            "accesibilidad_general": 4,
+            "precision_accesibilidad": "4.00",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.voluntario",
+        "pk": 1,
+        "fields": {
+            "usuario": 1,
+            "nombre_publico": "Akira Subs",
+            "descripcion": "Especialista en subtítulos accesibles.",
+            "especialidad": "Subtítulos accesibles",
+            "fecha_alta": "2025-02-01",
+            "disponible": true,
+            "puntos": 250,
+            "colaboraciones_completadas": 6,
+            "insignias": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.voluntario",
+        "pk": 2,
+        "fields": {
+            "usuario": 4,
+            "nombre_publico": "Luna Audio",
+            "descripcion": "Voluntaria de audiodescripción.",
+            "especialidad": "Audiodescripción",
+            "fecha_alta": "2025-02-01",
+            "disponible": true,
+            "puntos": 320,
+            "colaboraciones_completadas": 9,
+            "insignias": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.voluntario",
+        "pk": 3,
+        "fields": {
+            "usuario": 6,
+            "nombre_publico": "Mika Revisión",
+            "descripcion": "Revisión de accesibilidad.",
+            "especialidad": "Revisión de accesibilidad",
+            "fecha_alta": "2025-02-01",
+            "disponible": true,
+            "puntos": 180,
+            "colaboraciones_completadas": 5,
+            "insignias": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.voluntario",
+        "pk": 4,
+        "fields": {
+            "usuario": 8,
+            "nombre_publico": "Yuki Signos",
+            "descripcion": "Intérprete de lengua de signos.",
+            "especialidad": "Lengua de signos",
+            "fecha_alta": "2025-02-01",
+            "disponible": true,
+            "puntos": 90,
+            "colaboraciones_completadas": 2,
+            "insignias": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 1,
+        "fields": {
+            "voluntario": 1,
+            "titulo": "Subtítulos de Your Name",
+            "descripcion": "Revisión y creación de subtítulos accesibles.",
+            "tipo": "Subtítulos",
+            "estado": "Aprobada",
+            "fecha_creacion": "2025-07-01T08:00:00Z",
+            "fecha_inicio": "2025-07-02T09:00:00Z",
+            "fecha_finalizacion": "2025-07-06T18:00:00Z",
+            "comentarios_revision": "Trabajo excelente.",
+            "puntos_obtenidos": 80,
+            "fecha_revision": "2025-07-06T18:00:00Z",
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 2,
+        "fields": {
+            "voluntario": 1,
+            "titulo": "Subtítulos de Cowboy Bebop",
+            "descripcion": "Subtítulos con descripción de sonidos.",
+            "tipo": "Subtítulos",
+            "estado": "En revisión",
+            "fecha_creacion": "2025-07-02T08:00:00Z",
+            "fecha_inicio": "2025-07-03T09:00:00Z",
+            "fecha_finalizacion": null,
+            "comentarios_revision": "",
+            "puntos_obtenidos": 0,
+            "fecha_revision": null,
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 3,
+        "fields": {
+            "voluntario": 2,
+            "titulo": "Audiodescripción de Spirited Away",
+            "descripcion": "Guion de audiodescripción de la película.",
+            "tipo": "Audiodescripción",
+            "estado": "Aprobada",
+            "fecha_creacion": "2025-07-03T08:00:00Z",
+            "fecha_inicio": "2025-07-04T09:00:00Z",
+            "fecha_finalizacion": "2025-07-08T18:00:00Z",
+            "comentarios_revision": "Muy detallada.",
+            "puntos_obtenidos": 100,
+            "fecha_revision": "2025-07-08T18:00:00Z",
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 4,
+        "fields": {
+            "voluntario": 2,
+            "titulo": "Audiodescripción de Demon Slayer",
+            "descripcion": "Audiodescripción de los primeros episodios.",
+            "tipo": "Audiodescripción",
+            "estado": "En proceso",
+            "fecha_creacion": "2025-07-04T08:00:00Z",
+            "fecha_inicio": "2025-07-05T09:00:00Z",
+            "fecha_finalizacion": null,
+            "comentarios_revision": "",
+            "puntos_obtenidos": 0,
+            "fecha_revision": null,
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 5,
+        "fields": {
+            "voluntario": 3,
+            "titulo": "Revisión de A Silent Voice",
+            "descripcion": "Revisión de la ficha de accesibilidad.",
+            "tipo": "Revisión",
+            "estado": "Aprobada",
+            "fecha_creacion": "2025-07-05T08:00:00Z",
+            "fecha_inicio": "2025-07-06T09:00:00Z",
+            "fecha_finalizacion": "2025-07-10T18:00:00Z",
+            "comentarios_revision": "Correcto.",
+            "puntos_obtenidos": 60,
+            "fecha_revision": "2025-07-10T18:00:00Z",
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 6,
+        "fields": {
+            "voluntario": 3,
+            "titulo": "Revisión de One Piece",
+            "descripcion": "Comprobación de contraste visual.",
+            "tipo": "Revisión",
+            "estado": "Pendiente",
+            "fecha_creacion": "2025-07-06T08:00:00Z",
+            "fecha_inicio": null,
+            "fecha_finalizacion": null,
+            "comentarios_revision": "",
+            "puntos_obtenidos": 0,
+            "fecha_revision": null,
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 7,
+        "fields": {
+            "voluntario": 4,
+            "titulo": "Lengua de signos de A Silent Voice",
+            "descripcion": "Vídeo con interpretación en lengua de signos.",
+            "tipo": "Lengua de signos",
+            "estado": "Rechazada",
+            "fecha_creacion": "2025-07-07T08:00:00Z",
+            "fecha_inicio": "2025-07-08T09:00:00Z",
+            "fecha_finalizacion": "2025-07-12T18:00:00Z",
+            "comentarios_revision": "Falta calidad de imagen.",
+            "puntos_obtenidos": 0,
+            "fecha_revision": "2025-07-12T18:00:00Z",
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 8,
+        "fields": {
+            "voluntario": 4,
+            "titulo": "Lengua de signos de Your Name",
+            "descripcion": "Interpretación de escenas clave.",
+            "tipo": "Lengua de signos",
+            "estado": "En proceso",
+            "fecha_creacion": "2025-07-08T08:00:00Z",
+            "fecha_inicio": "2025-07-09T09:00:00Z",
+            "fecha_finalizacion": null,
+            "comentarios_revision": "",
+            "puntos_obtenidos": 0,
+            "fecha_revision": null,
+            "archivo_entrega": null
+        }
+    }
+]
