@@ -1,0 +1,54 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Catálogo de animes | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">EXPLORA ANIACCESS</span>
+    <h1>Catálogo de animes</h1>
+    <p>Descubre tus próximos animes favoritos y consulta su información.</p>
+</section>
+
+<section class="search-section">
+    <form method="get" class="search-form">
+        <input type="search" name="buscar" placeholder="Buscar por título..." value="{{ buscar }}">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</section>
+
+<section class="anime-grid">
+    {% for anime in animes %}
+    <article class="anime-card">
+        {% if anime.imagen %}
+        <img src="{{ anime.imagen.url }}" alt="{{ anime.titulo }}">
+        {% else %}
+        <div class="image-placeholder">ANIACCESS</div>
+        {% endif %}
+
+        <div class="card-content">
+            <span class="badge">{{ anime.estado }}</span>
+            <h2>{{ anime.titulo }}</h2>
+            <p>{{ anime.titulo_original }}</p>
+            <p>{{ anime.sinopsis|truncatewords:22 }}</p>
+
+            <div class="card-meta">
+                <span>{{ anime.anio_estreno }}</span>
+                <span>{{ anime.num_episodios }} episodios</span>
+                <span>{{ anime.tipo }}</span>
+            </div>
+            <!-- // Vista y url que se añadira en la rama general URLs -->
+        </div>
+        {% comment %}
+        <a href="{% url 'detalle_anime' anime.id %}" class="btn btn-primary">Ver detalles</a>
+        {% endcomment %}
+    </article>
+    {% empty %}
+    <div class="empty-state">
+        <h2>No se han encontrado animes</h2>
+        <p>Prueba con otro término de búsqueda.</p>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

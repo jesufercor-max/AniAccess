@@ -1,0 +1,512 @@
+[
+    {
+        "model": "AniAccess.idioma",
+        "pk": 1,
+        "fields": {
+            "nombre": "Español (España)",
+            "codigo": "es-ES",
+            "descripcion": "Castellano de España",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 2,
+        "fields": {
+            "nombre": "Japonés",
+            "codigo": "ja-JP",
+            "descripcion": "Idioma original japonés",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.idioma",
+        "pk": 3,
+        "fields": {
+            "nombre": "Inglés",
+            "codigo": "en-US",
+            "descripcion": "Inglés internacional",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 1,
+        "fields": {
+            "nombre": "Discapacidad Auditiva",
+            "descripcion": "Personas sordas o con hipoacusia que requieren subtítulos descriptivos o lengua de signos.",
+            "icono": "fa-deaf",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 2,
+        "fields": {
+            "nombre": "Discapacidad Visual",
+            "descripcion": "Personas ciegas o con baja visión que necesitan audiodescripción o alto contraste.",
+            "icono": "fa-low-vision",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.tipodiscapacidad",
+        "pk": 3,
+        "fields": {
+            "nombre": "Sensibilidad Fotosensible",
+            "descripcion": "Usuarios que requieren avisos de luces intermitentes o control de brillo/contraste.",
+            "icono": "fa-eye-slash",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 1,
+        "fields": {
+            "nombre": "Crunchyroll",
+            "descripcion": "Plataforma líder especializada en anime y simulcasts.",
+            "web": "https://crunchyroll.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 2,
+        "fields": {
+            "nombre": "Netflix",
+            "descripcion": "Servicio de streaming con amplio catálogo de anime y buenas opciones de audiodescripción.",
+            "web": "https://netflix.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.plataforma",
+        "pk": 3,
+        "fields": {
+            "nombre": "Prime Video",
+            "descripcion": "Plataforma de Amazon con películas y series de animación japonesa.",
+            "web": "https://primevideo.com",
+            "logo": null,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 1,
+        "fields": {
+            "nombre_usuario": "akira_fan",
+            "email": "akira@ejemplo.com",
+            "fecha_registro": "2026-01-15T10:30:00",
+            "fecha_nacimiento": "1998-05-12",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 2,
+        "fields": {
+            "nombre_usuario": "elena_sub",
+            "email": "elena@ejemplo.com",
+            "fecha_registro": "2026-02-01T14:20:00",
+            "fecha_nacimiento": "1995-11-23",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.usuario",
+        "pk": 3,
+        "fields": {
+            "nombre_usuario": "carlos_dev",
+            "email": "carlos@ejemplo.com",
+            "fecha_registro": "2026-02-10T09:00:00",
+            "fecha_nacimiento": "2001-03-08",
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 1,
+        "fields": {
+            "usuario": 1,
+            "descripcion": "Prefiero subtítulos cerrados con descripción de efectos de sonido.",
+            "preferencia_subtitulos": true,
+            "preferencia_audiodescripcion": false,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": false,
+            "preferencia_descripcion_sonidos": true,
+            "tipos_discapacidad": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.perfilaccesibilidad",
+        "pk": 2,
+        "fields": {
+            "usuario": 2,
+            "descripcion": "Necesito pista de audiodescripción en español y doblaje claro.",
+            "preferencia_subtitulos": false,
+            "preferencia_audiodescripcion": true,
+            "preferencia_lengua_signos": false,
+            "preferencia_doblaje": true,
+            "preferencia_descripcion_sonidos": false,
+            "tipos_discapacidad": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 1,
+        "fields": {
+            "titulo": "Frieren: Tras finalizar el viaje",
+            "titulo_original": "Sousou no Frieren",
+            "sinopsis": "Tras derrotar al Rey Demonio junto a su grupo de héroes, la maga elfa Frieren emprende un nuevo viaje para comprender el valor del tiempo y los lazos humanos.",
+            "anio_estreno": 2023,
+            "num_episodios": 28,
+            "tipo": "Serie TV",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 2,
+        "fields": {
+            "titulo": "A Silent Voice",
+            "titulo_original": "Koe no Katachi",
+            "sinopsis": "Shoya Ishida intenta redimirse años después de haber acosado en primaria a Shoko Nishimiya, una compañera con discapacidad auditiva.",
+            "anio_estreno": 2016,
+            "num_episodios": 1,
+            "tipo": "Película",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 3,
+        "fields": {
+            "titulo": "Jujutsu Kaisen",
+            "titulo_original": "Jujutsu Kaisen",
+            "sinopsis": "Yuji Itadori se traga un dedo maldito para salvar a sus amigos y se convierte en el recipiente de Ryomen Sukuna, ingresando en una escuela de hechicería.",
+            "anio_estreno": 2020,
+            "num_episodios": 47,
+            "tipo": "Serie TV",
+            "estado": "En emisión",
+            "imagen": null,
+            "usuarios_favoritos": [
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.anime",
+        "pk": 4,
+        "fields": {
+            "titulo": "Ranking of Kings",
+            "titulo_original": "Ousama Ranking",
+            "sinopsis": "Bojji, un príncipe sordo y aparentemente débil que se comunica mediante lengua de signos, lucha por demostrar su valía y convertirse en el mejor rey.",
+            "anio_estreno": 2021,
+            "num_episodios": 23,
+            "tipo": "Serie TV",
+            "estado": "Finalizado",
+            "imagen": null,
+            "usuarios_favoritos": [
+                1,
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 1,
+        "fields": {
+            "anime": 1,
+            "plataforma": 1,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2023-09-29",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 2,
+        "fields": {
+            "anime": 1,
+            "plataforma": 2,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2024-03-01",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 3,
+        "fields": {
+            "anime": 2,
+            "plataforma": 2,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2020-06-05",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 4,
+        "fields": {
+            "anime": 3,
+            "plataforma": 1,
+            "idioma": 2,
+            "subtitulos": true,
+            "doblaje": false,
+            "fecha_inicio": "2020-10-03",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 5,
+        "fields": {
+            "anime": 3,
+            "plataforma": 3,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2023-05-15",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.disponibilidad",
+        "pk": 6,
+        "fields": {
+            "anime": 4,
+            "plataforma": 1,
+            "idioma": 1,
+            "subtitulos": true,
+            "doblaje": true,
+            "fecha_inicio": "2021-10-15",
+            "fecha_fin": null,
+            "activo": true
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 1,
+        "fields": {
+            "anime": 1,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": true,
+            "descripcion_sonidos": true,
+            "lengua_signos": false,
+            "doblaje": true,
+            "contraste_visual": true,
+            "observaciones": "Excelente ritmo narrativo y subtítulos CC bien sincronizados en Netflix.",
+            "tipos_discapacidad": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 2,
+        "fields": {
+            "anime": 2,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": true,
+            "descripcion_sonidos": true,
+            "lengua_signos": true,
+            "doblaje": true,
+            "contraste_visual": false,
+            "observaciones": "Incluye lengua de signos japonesa integrada en la trama con traducción fiel.",
+            "tipos_discapacidad": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 3,
+        "fields": {
+            "anime": 3,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": false,
+            "descripcion_sonidos": false,
+            "lengua_signos": false,
+            "doblaje": true,
+            "contraste_visual": false,
+            "observaciones": "Contiene escenas de combate con destellos intensos; precaución para fotosensibles.",
+            "tipos_discapacidad": [
+                3
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.accesibilidad",
+        "pk": 4,
+        "fields": {
+            "anime": 4,
+            "subtitulos_accesibles": true,
+            "audiodescripcion": false,
+            "descripcion_sonidos": true,
+            "lengua_signos": true,
+            "doblaje": true,
+            "contraste_visual": true,
+            "observaciones": "Protagonista usuario de lengua de signos con gran expresividad visual.",
+            "tipos_discapacidad": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 1,
+        "fields": {
+            "usuario": 1,
+            "anime": 1,
+            "puntuacion": 5,
+            "comentario": "Los subtítulos descriptivos marcan cada efecto mágico y ambiental con mucha precisión.",
+            "fecha": "2026-03-01T18:00:00",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 5,
+            "precision_accesibilidad": "4.85",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 2,
+        "fields": {
+            "usuario": 2,
+            "anime": 2,
+            "puntuacion": 7,
+            "comentario": "La audiodescripción en español transmite perfectamente las emociones y los gestos en lengua de signos.",
+            "fecha": "2026-03-05T12:15:00",
+            "subtitulos_valoracion": 5,
+            "audio_valoracion": 5,
+            "accesibilidad_general": 5,
+            "precision_accesibilidad": "4.95",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.valoracion",
+        "pk": 3,
+        "fields": {
+            "usuario": 3,
+            "anime": 3,
+            "puntuacion": 4,
+            "comentario": "Buen doblaje, aunque faltan descripciones de sonido en los subtítulos estándar.",
+            "fecha": "2026-03-10T21:40:00",
+            "subtitulos_valoracion": 3,
+            "audio_valoracion": 4,
+            "accesibilidad_general": 3,
+            "precision_accesibilidad": "3.40",
+            "visible": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 1,
+        "fields": {
+            "nombre": "Pionero Accesible",
+            "descripcion": "Otorgada por completar la primera revisión o aporte de accesibilidad.",
+            "icono": null,
+            "puntos_necesarios": 50,
+            "colaboraciones_necesarias": 1,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.insignia",
+        "pk": 2,
+        "fields": {
+            "nombre": "Maestro del Subtitulado",
+            "descripcion": "Reconocimiento a voluntarios con más de 5 colaboraciones aprobadas en subtítulos CC.",
+            "icono": null,
+            "puntos_necesarios": 300,
+            "colaboraciones_necesarias": 5,
+            "activa": true
+        }
+    },
+    {
+        "model": "AniAccess.voluntario",
+        "pk": 1,
+        "fields": {
+            "usuario": 2,
+            "nombre_publico": "Elena Subtituladora",
+            "descripcion": "Especialista en subtitulado para personas sordas (SPS) y audiodescripción.",
+            "especialidad": "Subtítulos accesibles",
+            "fecha_alta": "2026-02-02",
+            "disponible": true,
+            "puntos": 350,
+            "colaboraciones_completadas": 6,
+            "insignias": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 1,
+        "fields": {
+            "voluntario": 1,
+            "titulo": "Guion de audiodescripción para Frieren Ep. 1",
+            "descripcion": "Redacción y sincronización de pista AD en castellano para el primer episodio.",
+            "tipo": "Audiodescripción",
+            "estado": "Aprobada",
+            "fecha_creacion": "2026-02-15T10:00:00",
+            "fecha_inicio": "2026-02-16T09:00:00",
+            "fecha_finalizacion": "2026-02-20T18:30:00",
+            "comentarios_revision": "Excelente trabajo de síntesis en las escenas sin diálogo.",
+            "puntos_obtenidos": 100,
+            "fecha_revision": "2026-02-21T11:00:00",
+            "archivo_entrega": null
+        }
+    },
+    {
+        "model": "AniAccess.colaboracion",
+        "pk": 2,
+        "fields": {
+            "voluntario": 1,
+            "titulo": "Revisión de subtítulos CC en Ranking of Kings",
+            "descripcion": "Verificación de etiquetas de efectos sonoros y tonos de voz.",
+            "tipo": "Revisión",
+            "estado": "En proceso",
+            "fecha_creacion": "2026-03-12T16:00:00",
+            "fecha_inicio": "2026-03-13T10:00:00",
+            "fecha_finalizacion": null,
+            "comentarios_revision": "",
+            "puntos_obtenidos": 0,
+            "fecha_revision": null,
+            "archivo_entrega": null
+        }
+    }
+]

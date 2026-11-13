@@ -1,0 +1,47 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Inicio | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="eyebrow">ANIME SIN BARRERAS</span>
+
+        <h1>El anime debe ser accesible para todos.</h1>
+
+        <p>
+            AniAccess es una plataforma que facilita el acceso a información
+            sobre anime, plataformas de reproducción y características de
+            accesibilidad audiovisual.
+        </p>
+
+        <div class="hero-actions">
+            <a href="{% url 'catalogo_animes' %}" class="btn btn-primary">
+                Explorar animes
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="page-header">
+    <span class="eyebrow">EXPLORA LA PLATAFORMA</span>
+    <h2>Todo AniAccess en un solo lugar</h2>
+    <p>Accede a las diferentes secciones de la aplicación.</p>
+</section>
+
+<section class="data-grid">
+
+    <article class="feature-card">
+        <span class="feature-icon">01</span>
+        <h3>Catálogo de animes</h3>
+        <p>Consulta información sobre los animes disponibles.</p>
+        <a href="{% url 'catalogo_animes' %}" class="btn btn-secondary">Explorar</a>
+    </article>
+
+    
+
+</section>
+
+
+{% endblock %}
