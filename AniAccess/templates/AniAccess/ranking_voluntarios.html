@@ -1,0 +1,116 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Voluntariado | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">COMUNIDAD COLABORATIVA</span>
+    <h1>Ranking de voluntarios</h1>
+    <p>
+        Conoce a las personas que contribuyen a hacer AniAccess
+        más accesible para toda la comunidad.
+    </p>
+</section>
+
+<div class="data-grid">
+
+    {% for voluntario in voluntarios %}
+
+        <article class="volunteer-card">
+
+            <span class="badge">
+                Puesto #{{ forloop.counter }}
+            </span>
+
+            <h2>{{ voluntario.nombre_publico }}</h2>
+
+            <p>{{ voluntario.descripcion }}</p>
+
+            <div class="card-meta">
+                <span>@{{ voluntario.usuario.nombre_usuario }}</span>
+                <span>{{ voluntario.especialidad }}</span>
+                <span>{{ voluntario.puntos }} puntos</span>
+            </div>
+
+            <div class="availability-item">
+                <strong>Fecha de alta:</strong>
+                <p>{{ voluntario.fecha_alta|date:"d/m/Y" }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Disponible:</strong>
+                <p>{{ voluntario.disponible|yesno:"Sí,No" }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Colaboraciones completadas:</strong>
+                <p>{{ voluntario.colaboraciones_completadas }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Colaboraciones aprobadas:</strong>
+                <p>{{ voluntario.total_colaboraciones }}</p>
+            </div>
+
+            <h3 style="margin-top: 20px;">Insignias conseguidas</h3>
+
+            {% for insignia in voluntario.insignias.all %}
+
+                <div class="availability-item">
+                    <strong>{{ insignia.nombre }}</strong>
+                    <p>{{ insignia.descripcion }}</p>
+                    <p>Puntos necesarios: {{ insignia.puntos_necesarios }}</p>
+                    <p>Colaboraciones necesarias: {{ insignia.colaboraciones_necesarias }}</p>
+                </div>
+
+            {% empty %}
+
+                <p>Todavía no tiene insignias.</p>
+
+            {% endfor %}
+
+            <h3 style="margin-top: 20px;">Colaboraciones</h3>
+
+            {% for colaboracion in voluntario.colaboraciones.all %}
+
+                <div class="availability-item">
+                    <strong>{{ colaboracion.titulo }}</strong>
+                    <p>{{ colaboracion.descripcion }}</p>
+                    <p>Tipo: {{ colaboracion.tipo }}</p>
+                    <p>Estado: {{ colaboracion.estado }}</p>
+                    <p>Puntos: {{ colaboracion.puntos_obtenidos }}</p>
+                    <p>Fecha de inicio: {{ colaboracion.fecha_inicio|date:"d/m/Y"|default:"Sin iniciar" }}</p>
+                    <p>Fecha de finalización: {{ colaboracion.fecha_finalizacion|date:"d/m/Y"|default:"Sin finalizar" }}</p>
+
+                    {% comment %}
+                    <a
+                        class="btn btn-primary"
+                        style="margin-top: 10px;"
+                        href="{% url 'detalle_colaboracion' colaboracion.id colaboracion.estado %}"
+                    >
+                        Ver colaboración
+                    </a>
+                    {% endcomment %}
+                </div>
+
+            {% empty %}
+
+                <p>No tiene colaboraciones registradas.</p>
+
+            {% endfor %}
+
+        </article>
+
+    {% empty %}
+
+        <div class="empty-state">
+            <h2>No hay voluntarios disponibles</h2>
+            <p>No hay voluntarios disponibles actualmente en la plataforma.</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -19,51 +19,51 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 7 Ranking de Accesibilidad
-def ranking_accesibilidad(request):
+# Vista 8 Ranking de Voluntarios
+def ranking_voluntarios(request):
     """
-    Muestra un ranking de animes ordenado por su puntuación
-    media de accesibilidad.
+    Muestra un ranking de voluntarios disponibles,
+    ordenados por sus puntos y colaboraciones aprobadas.
     """
 
     # QUERYSET ORM:
-    # Calcula el número de valoraciones y la media de accesibilidad.
-    # El filter aplicado después de annotate filtra los resultados
-    # agregados, equivalente a utilizar HAVING en SQL.
-    animes = Anime.objects.annotate(
-        total_valoraciones=Count(
-            'valoraciones',
+    # Filtra voluntarios disponibles, cuenta sus colaboraciones aprobadas
+    # mediante Count con filtro Q, y precarga usuario, insignias y colaboraciones.
+    voluntarios = Voluntario.objects.filter(
+        disponible=True
+    ).select_related(
+        'usuario'
+    ).prefetch_related(
+        'insignias',
+        'colaboraciones'
+    ).annotate(
+        total_colaboraciones=Count(
+            'colaboraciones',
+            filter=Q(colaboraciones__estado='Aprobada'),
             distinct=True
-        ),
-        media_puntuacion=Avg(
-            'valoraciones__accesibilidad_general'
         )
-    ).filter(
-        total_valoraciones__gte=1,
-        media_puntuacion__gte=3
     ).order_by(
-        '-media_puntuacion',
-        '-total_valoraciones'
+        '-puntos',
+        '-total_colaboraciones'
     )[:10]
 
     # SQL RAW:
-    # animes = Anime.objects.raw(
-    #     "SELECT a.*, "
-    #     "COUNT(DISTINCT v.id) AS total_valoraciones, "
-    #     "AVG(v.accesibilidad_general) AS media_puntuacion "
-    #     "FROM AniAccess_anime a "
-    #     "INNER JOIN AniAccess_valoracion v "
-    #     "ON v.anime_id = a.id "
-    #     "GROUP BY a.id "
-    #     "HAVING COUNT(DISTINCT v.id) >= 1 "
-    #     "AND AVG(v.accesibilidad_general) >= 3 "
-    #     "ORDER BY media_puntuacion DESC, "
-    #     "total_valoraciones DESC "
-    #     "LIMIT 10"
+    # voluntarios = Voluntario.objects.raw(
+    #     """
+    #     SELECT v.*,
+    #     COUNT(DISTINCT CASE WHEN c.estado = 'Aprobada' THEN c.id END) AS total_colaboraciones
+    #     FROM AniAccess_voluntario v
+    #     INNER JOIN AniAccess_usuario u ON u.id = v.usuario_id
+    #     LEFT JOIN AniAccess_colaboracion c ON c.voluntario_id = v.id
+    #     WHERE v.disponible = 1
+    #     GROUP BY v.id
+    #     ORDER BY v.puntos DESC, total_colaboraciones DESC
+    #     LIMIT 10
+    #     """
     # )
 
     return render(
         request,
-        'AniAccess/ranking_accesibilidad.html',
-        {'animes': animes}
+        'AniAccess/ranking_voluntarios.html',
+        {'voluntarios': voluntarios}
     )
