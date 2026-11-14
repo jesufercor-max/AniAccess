@@ -19,46 +19,55 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 5 Perfil de Usuario 
-def perfil_usuario(request, nombre):
+# Vista 6 Animes Favoritos del Usuario
+def animes_favoritos(request, nombre):
     """
-    Muestra el perfil de un usuario, sus preferencias de accesibilidad,
-    valoraciones y datos de voluntariado.
+    Muestra los animes favoritos de un usuario.
+    Permite buscar por título o título original.
     """
 
-    # QUERYSET ORM:
-    # select_related carga las relaciones OneToOne.
-    # prefetch_related carga las valoraciones, preferencias,
-    # insignias y colaboraciones.
     usuario = get_object_or_404(
-        Usuario.objects
-        .select_related(
-            'perfil_accesibilidad',
-            'voluntario',
-        )
-        .prefetch_related(
-            'perfil_accesibilidad__tipos_discapacidad',
-            'valoraciones__anime',
-            'voluntario__insignias',
-            'voluntario__colaboraciones',
-        ),
+        Usuario,
         nombre_usuario=nombre
     )
 
+    buscar = request.GET.get('buscar', '')
+
+    # QUERYSET ORM:
+    # Obtiene los animes relacionados con el usuario mediante
+    # la relación ManyToMany usuarios_favoritos y filtra por búsqueda.
+    # Carga también sus plataformas y disponibilidades.
+    animes = Anime.objects.filter(
+        Q(usuarios_favoritos=usuario) &
+        (
+            Q(titulo__icontains=buscar) |
+            Q(titulo_original__icontains=buscar)
+        )
+    ).prefetch_related(
+        'plataformas',
+        'disponibilidades__idioma'
+    ).order_by('titulo')
+
     # SQL RAW:
-    # usuario = Usuario.objects.raw(
-    #     "SELECT u.* "
-    #     "FROM AniAccess_usuario u "
-    #     "LEFT JOIN AniAccess_perfilaccesibilidad pa "
-    #     "ON pa.usuario_id = u.id "
-    #     "LEFT JOIN AniAccess_voluntario v "
-    #     "ON v.usuario_id = u.id "
-    #     "WHERE u.nombre_usuario = %s",
-    #     [nombre]
+    # animes = Anime.objects.raw(
+    #     """
+    #     SELECT a.*
+    #     FROM AniAccess_anime a
+    #     INNER JOIN AniAccess_anime_usuarios_favoritos f
+    #     ON f.anime_id = a.id
+    #     WHERE f.usuario_id = %s
+    #     AND (a.titulo LIKE %s OR a.titulo_original LIKE %s)
+    #     ORDER BY a.titulo
+    #     """,
+    #     [usuario.id, f'%{buscar}%', f'%{buscar}%']
     # )
 
     return render(
         request,
-        'AniAccess/perfil_usuario.html',
-        {'usuario': usuario}
+        'AniAccess/animes_favoritos.html',
+        {
+            'usuario': usuario,
+            'animes': animes,
+            'buscar': buscar
+        }
     )

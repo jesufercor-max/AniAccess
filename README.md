@@ -1,65 +1,67 @@
-# Rama 5 - Perfil de usuario
+# Rama 6 - Animes favoritos
 
 ## Información general
 
-- **Nombre de la rama:** URL_Perfil-Usuario
-- **URL:** `/usuarios/<str:nombre>/`
-- **Vista:** `perfil_usuario`
-- **Plantilla:** `perfil_usuario.html`
+- **Nombre de la rama:** URL_Animes-Favoritos
+- **URL:** `/usuarios/<str:nombre>/favoritos/`
+- **Vista:** `animes_favoritos`
+- **Plantilla:** `animes_favoritos.html`
 
 ## Objetivo
 
-Mostrar la información de un usuario, sus preferencias de accesibilidad,
-valoraciones y actividad como voluntario.
+Mostrar los animes que un usuario ha añadido a su lista de favoritos y permitir filtrar la colección mediante un buscador por título o título original.
 
 ## QuerySet utilizado
 
-Se utiliza `Usuario.objects.select_related()` y `prefetch_related()`.
+Se utiliza la relación ManyToMany entre `Anime` y `Usuario`, combinando condiciones con objetos `Q` para la búsqueda dinámica.
 
 ### Operaciones utilizadas
 
-- `get_object_or_404()`: obtiene el usuario o devuelve un error 404.
-- `select_related()`: carga las relaciones OneToOne.
-- `prefetch_related()`: carga las relaciones inversas y ManyToMany.
+- `get_object_or_404()`: obtiene el usuario a partir de su `nombre_usuario`.
+- `filter()` y objetos `Q`: filtra los animes relacionados con el usuario y aplica búsqueda insensible a mayúsculas (`icontains`) por `titulo` o `titulo_original`.
+- `prefetch_related()`: optimiza la carga de `plataformas` y `disponibilidades__idioma`.
+- `order_by()`: ordena los títulos alfabéticamente.
 
 ## SQL RAW
 
-Se incluye una consulta SQL mediante `Usuario.objects.raw()`.
-Está comentada como alternativa didáctica. La consulta ORM es la ejecutada.
+Se incluye una consulta equivalente mediante `Anime.objects.raw()` con unión (`INNER JOIN`) a la tabla intermedia `AniAccess_anime_usuarios_favoritos` y filtrado por `LIKE`.
+Está comentada y no se ejecuta.
 
 ## Relaciones utilizadas
 
-- Usuario y PerfilAccesibilidad: OneToOne.
-- Usuario y Voluntario: OneToOne.
-- Usuario y Valoracion: relación inversa ManyToOne.
-- PerfilAccesibilidad y TipoDiscapacidad: ManyToMany.
-- Voluntario e Insignia: ManyToMany.
-- Voluntario y Colaboracion: relación inversa ManyToOne.
+- `Anime` y `Usuario`: ManyToMany mediante `usuarios_favoritos`.
+- `Anime` y `Plataforma`: ManyToMany mediante `Disponibilidad`.
+- `Disponibilidad` e `Idioma`: ManyToOne.
 
 ## Plantilla HTML
 
 Muestra:
 
-- Datos del usuario.
-- Preferencias de accesibilidad.
-- Tipos de discapacidad.
-- Valoraciones realizadas.
-- Información del voluntario.
-- Insignias y colaboraciones.
+- Cabecera con el nombre del usuario y formulario de búsqueda (`GET`).
+- Título e imagen del anime (con marcador visual si no tiene imagen).
+- Sinopsis y título original.
+- Año de estreno, número de episodios, tipo y estado.
+- Plataformas disponibles.
+- Disponibilidades por idioma (indicando subtítulos, doblaje y estado activo).
+- Enlace al detalle del anime (comentado con `{% comment %}` para evitar `NoReverseMatch` hasta integrar la vista de detalle).
 
 ## Prueba
 
-`http://127.0.0.1:8000/usuarios/elena_sub/`
+1. Asegurarse de tener datos cargados en la base de datos (`python3 manage.py loaddata datos_iniciales.json`) y favoritos asignados al usuario.
+2. Acceder en el navegador a:
 
-Sustituir `nombre_usuario` por un usuario existente (elena_sub).
+`http://127.0.0.1:8000/usuarios/elena_sub/favoritos/`
+
+*(Se puede sustituir `elena_sub` por cualquier otro `nombre_usuario` existente en la base de datos).*
 
 ## Fusión
 
 ```bash
 git add .
-git commit -m "Añadir perfil de usuario"
-git push -u originURL_Perfil-Usuario
+git commit -m "Añadir listado y buscador de animes favoritos"
+git push -u origin URL_Animes-Favoritos
 
 git switch URLs
-git mergeURL_Perfil-Usuario
+git merge URL_Animes-Favoritos
 git push origin URLs
+```
