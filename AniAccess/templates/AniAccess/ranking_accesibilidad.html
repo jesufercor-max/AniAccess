@@ -1,0 +1,63 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Ranking de accesibilidad | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">VALORACIONES DE LA COMUNIDAD</span>
+    <h1>Ranking de accesibilidad</h1>
+    <p>
+        Descubre los animes mejor valorados por su accesibilidad
+        según las opiniones de los usuarios.
+    </p>
+</section>
+
+<div class="ranking-list">
+
+    {% for anime in animes %}
+
+        <article class="ranking-card">
+
+            <div class="ranking-position">
+                #{{ forloop.counter }}
+            </div>
+
+            {% if anime.imagen %}
+                <img src="{{ anime.imagen.url }}" alt="Portada de {{ anime.titulo }}">
+            {% else %}
+                <div class="image-placeholder">ANIACCESS</div>
+            {% endif %}
+
+            <div class="ranking-content">
+                <h2>{{ anime.titulo }}</h2>
+                <p>{{ anime.sinopsis|truncatewords:25 }}</p>
+
+                <div class="card-meta">
+                    <span>Media: {{ anime.media_puntuacion|floatformat:2 }}/5</span>
+                    <span>{{ anime.total_valoraciones }} valoraciones</span>
+                    <span>{{ anime.anio_estreno }}</span>
+                    <span>{{ anime.estado }}</span>
+                </div>
+
+                {% comment %}
+                <a href="{% url 'detalle_anime' anime.id %}" class="btn btn-primary" style="margin-top: 10px;">
+                    Consultar anime
+                </a>
+                {% endcomment %}
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="empty-state">
+            <h2>Ranking sin datos suficientes</h2>
+            <p>Todavía no hay suficientes valoraciones para generar el ranking.</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

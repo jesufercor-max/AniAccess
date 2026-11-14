@@ -19,55 +19,51 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 6 Animes Favoritos del Usuario
-def animes_favoritos(request, nombre):
+# Vista 7 Ranking de Accesibilidad
+def ranking_accesibilidad(request):
     """
-    Muestra los animes favoritos de un usuario.
-    Permite buscar por título o título original.
+    Muestra un ranking de animes ordenado por su puntuación
+    media de accesibilidad.
     """
-
-    usuario = get_object_or_404(
-        Usuario,
-        nombre_usuario=nombre
-    )
-
-    buscar = request.GET.get('buscar', '')
 
     # QUERYSET ORM:
-    # Obtiene los animes relacionados con el usuario mediante
-    # la relación ManyToMany usuarios_favoritos y filtra por búsqueda.
-    # Carga también sus plataformas y disponibilidades.
-    animes = Anime.objects.filter(
-        Q(usuarios_favoritos=usuario) &
-        (
-            Q(titulo__icontains=buscar) |
-            Q(titulo_original__icontains=buscar)
+    # Calcula el número de valoraciones y la media de accesibilidad.
+    # El filter aplicado después de annotate filtra los resultados
+    # agregados, equivalente a utilizar HAVING en SQL.
+    animes = Anime.objects.annotate(
+        total_valoraciones=Count(
+            'valoraciones',
+            distinct=True
+        ),
+        media_puntuacion=Avg(
+            'valoraciones__accesibilidad_general'
         )
-    ).prefetch_related(
-        'plataformas',
-        'disponibilidades__idioma'
-    ).order_by('titulo')
+    ).filter(
+        total_valoraciones__gte=1,
+        media_puntuacion__gte=3
+    ).order_by(
+        '-media_puntuacion',
+        '-total_valoraciones'
+    )[:10]
 
     # SQL RAW:
     # animes = Anime.objects.raw(
-    #     """
-    #     SELECT a.*
-    #     FROM AniAccess_anime a
-    #     INNER JOIN AniAccess_anime_usuarios_favoritos f
-    #     ON f.anime_id = a.id
-    #     WHERE f.usuario_id = %s
-    #     AND (a.titulo LIKE %s OR a.titulo_original LIKE %s)
-    #     ORDER BY a.titulo
-    #     """,
-    #     [usuario.id, f'%{buscar}%', f'%{buscar}%']
+    #     "SELECT a.*, "
+    #     "COUNT(DISTINCT v.id) AS total_valoraciones, "
+    #     "AVG(v.accesibilidad_general) AS media_puntuacion "
+    #     "FROM AniAccess_anime a "
+    #     "INNER JOIN AniAccess_valoracion v "
+    #     "ON v.anime_id = a.id "
+    #     "GROUP BY a.id "
+    #     "HAVING COUNT(DISTINCT v.id) >= 1 "
+    #     "AND AVG(v.accesibilidad_general) >= 3 "
+    #     "ORDER BY media_puntuacion DESC, "
+    #     "total_valoraciones DESC "
+    #     "LIMIT 10"
     # )
 
     return render(
         request,
-        'AniAccess/animes_favoritos.html',
-        {
-            'usuario': usuario,
-            'animes': animes,
-            'buscar': buscar
-        }
+        'AniAccess/ranking_accesibilidad.html',
+        {'animes': animes}
     )
