@@ -1,0 +1,267 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}{{ anime.titulo }} | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <span class="eyebrow">Ficha del anime</span>
+
+    <h1>{{ anime.titulo }}</h1>
+
+    <p>{{ anime.titulo_original }}</p>
+
+</section>
+
+<div class="grid">
+
+    <article class="card">
+
+        <h2>Información general</h2>
+
+        {% if anime.imagen %}
+            <img
+                src="{{ anime.imagen.url }}"
+                alt="Portada de {{ anime.titulo }}"
+                style="width:100%; max-height:350px; object-fit:cover; border-radius:12px;"
+            >
+        {% endif %}
+
+        <p>{{ anime.sinopsis }}</p>
+
+        <div class="data">
+
+            <div class="item">
+                <strong>Año de estreno</strong>
+                {{ anime.anio_estreno }}
+            </div>
+
+            <div class="item">
+                <strong>Episodios</strong>
+                {{ anime.num_episodios }}
+            </div>
+
+            <div class="item">
+                <strong>Tipo</strong>
+                {{ anime.tipo }}
+            </div>
+
+            <div class="item">
+                <strong>Estado</strong>
+                {{ anime.estado }}
+            </div>
+
+        </div>
+
+    </article>
+
+    <article class="card">
+
+        <h2>Estadísticas</h2>
+
+        <div class="item">
+            <strong>Total de valoraciones</strong>
+            {{ anime.total_valoraciones }}
+        </div>
+
+        <div class="item">
+            <strong>Media de accesibilidad</strong>
+            {% if anime.media_valoraciones %}
+                {{ anime.media_valoraciones|floatformat:2 }}/5
+            {% else %}
+                Sin valoraciones
+            {% endif %}
+        </div>
+
+    </article>
+
+</div>
+
+<section class="card" style="margin-top:20px;">
+
+    <h2>Plataformas disponibles</h2>
+
+    <div class="grid">
+
+        {% for plataforma in anime.plataformas.all %}
+
+            <article class="item">
+
+                <h3>{{ plataforma.nombre }}</h3>
+
+                <p>{{ plataforma.descripcion }}</p>
+
+                <p>
+                    <strong>Web:</strong>
+                    {% if plataforma.web %}
+                        <a href="{{ plataforma.web }}" target="_blank" rel="noopener">
+                            Visitar plataforma
+                        </a>
+                    {% else %}
+                        No disponible
+                    {% endif %}
+                </p>
+
+                <p>
+                    <strong>Activa:</strong>
+                    {{ plataforma.activa|yesno:"Sí,No" }}
+                </p>
+
+            </article>
+
+        {% empty %}
+
+            <p class="muted">No hay plataformas asociadas.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<section class="card" style="margin-top:20px;">
+
+    <h2>Disponibilidad por idioma</h2>
+
+    {% for disponibilidad in anime.disponibilidades.all %}
+
+        <div class="item" style="margin-bottom:10px;">
+
+            <h3>{{ disponibilidad.idioma.nombre }}</h3>
+
+            <p>
+                <strong>Código:</strong>
+                {{ disponibilidad.idioma.codigo }}
+            </p>
+
+            <p>
+                <strong>Subtítulos:</strong>
+                {{ disponibilidad.subtitulos|yesno:"Sí,No" }}
+            </p>
+
+            <p>
+                <strong>Doblaje:</strong>
+                {{ disponibilidad.doblaje|yesno:"Sí,No" }}
+            </p>
+
+            <p>
+                <strong>Fecha de inicio:</strong>
+                {{ disponibilidad.fecha_inicio|date:"d/m/Y" }}
+            </p>
+
+            <p>
+                <strong>Fecha de fin:</strong>
+                {{ disponibilidad.fecha_fin|date:"d/m/Y"|default:"Sin fecha de finalización" }}
+            </p>
+
+            <p>
+                <strong>Disponible:</strong>
+                {{ disponibilidad.activo|yesno:"Sí,No" }}
+            </p>
+
+        </div>
+
+    {% empty %}
+
+        <p class="muted">No hay disponibilidades registradas.</p>
+
+    {% endfor %}
+
+</section>
+
+<section class="card" style="margin-top:20px;">
+
+    <h2>Accesibilidad</h2>
+
+    {% if anime.accesibilidad %}
+
+        <div class="data">
+
+            <div class="item">
+                <strong>Subtítulos descriptivos</strong>
+                {{ anime.accesibilidad.subtitulos_cc|yesno:"Sí,No" }}
+            </div>
+
+            <div class="item">
+                <strong>Audiodescripción</strong>
+                {{ anime.accesibilidad.audiodescripcion|yesno:"Sí,No" }}
+            </div>
+
+            <div class="item">
+                <strong>Lengua de signos</strong>
+                {{ anime.accesibilidad.lengua_signos|yesno:"Sí,No" }}
+            </div>
+
+        </div>
+
+        <h3>Tipos de discapacidad contemplados</h3>
+
+        {% for tipo in anime.accesibilidad.tipos_discapacidad.all %}
+
+            <div class="item" style="margin-bottom:10px;">
+
+                <strong>{{ tipo.nombre }}</strong>
+
+                <p>{{ tipo.descripcion }}</p>
+
+                <p>
+                    Activo: {{ tipo.activo|yesno:"Sí,No" }}
+                </p>
+
+            </div>
+
+        {% empty %}
+
+            <p class="muted">No hay tipos de discapacidad asociados.</p>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p class="muted">
+            Este anime todavía no tiene información de accesibilidad.
+        </p>
+
+    {% endif %}
+
+</section>
+
+<section class="card" style="margin-top:20px;">
+
+    <h2>Valoraciones de los usuarios</h2>
+
+    {% for valoracion in anime.valoracion_set.all %}
+
+        <div class="item" style="margin-bottom:10px;">
+
+            <h3>{{ valoracion.usuario.nombre_usuario }}</h3>
+
+            <p>
+                <strong>Accesibilidad general:</strong>
+                {{ valoracion.accesibilidad_general }}/5
+            </p>
+
+            <p>{{ valoracion.comentario }}</p>
+
+            <p>
+                <strong>Fecha:</strong>
+                {{ valoracion.fecha|date:"d/m/Y" }}
+            </p>
+
+            <p>
+                <strong>Visible:</strong>
+                {{ valoracion.visible|yesno:"Sí,No" }}
+            </p>
+
+        </div>
+
+    {% empty %}
+
+        <p class="muted">Todavía no hay valoraciones.</p>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}
