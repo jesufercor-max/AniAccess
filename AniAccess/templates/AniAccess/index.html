@@ -5,69 +5,55 @@
 {% block content %}
 
 <section class="hero">
-
-    <span class="eyebrow">
-        Plataforma de anime accesible
-    </span>
-
-    <h1>El anime, sin barreras.</h1>
-
-    <p>
-        AniAccess reúne información sobre anime, plataformas,
-        opciones de accesibilidad y una comunidad colaborativa
-        para facilitar una experiencia inclusiva.
-    </p>
-
-    
+    <div class="hero-content">
+        <span class="eyebrow">PLATAFORMA DE ANIME ACCESIBLE</span>
+        <h1>El anime, sin barreras.</h1>
+        <p>
+            AniAccess reúne información sobre anime, plataformas,
+            opciones de accesibilidad y una comunidad colaborativa
+            para facilitar una experiencia inclusiva.
+        </p>
+    </div>
 </section>
 
-<section>
-
+<section class="content-section">
     <h2>Explora AniAccess</h2>
 
-    <div class="grid">
-
-       
-
-        <article class="card">
-            <h2>Plataformas</h2>
-            <p>Consulta dónde están disponibles los diferentes animes.</p>
-            <a href="{% url 'comparador_plataformas' %}" class="btn">
-                Comparar
+    <div class="data-grid">
+        <article class="feature-card">
+            <span class="feature-icon">♿</span>
+            <h3>Accesibilidad</h3>
+            <p>Encuentra títulos con opciones de accesibilidad.</p>
+            <a href="{% url 'buscador_accesibilidad' %}" class="btn btn-primary">
+                Buscar
             </a>
         </article>
-
-       
     </div>
-
 </section>
 
-<section class="card" style="margin-top:25px;">
-
+<section class="info-card content-section">
     <h2>Accesos por usuario</h2>
-
     <p>
         Para consultar el perfil de una persona o sus favoritos,
         utiliza su nombre de usuario en la dirección correspondiente.
     </p>
 
-    <div class="item">
+    <div class="availability-item">
         <strong>Perfil</strong>
-        /usuarios/nombre_usuario/
+        <p>/usuarios/nombre_usuario/</p>
     </div>
 
-    <div class="item">
+    <div class="availability-item">
         <strong>Favoritos</strong>
-        /usuarios/nombre_usuario/favoritos/
+        <p>/usuarios/nombre_usuario/favoritos/</p>
     </div>
 
-    <h2>Acceso a colaboraciones</h2>
+    <h2 style="margin-top: 25px;">Acceso a colaboraciones</h2>
 
-    <div class="item">
+    <div class="availability-item">
         <strong>Detalle</strong>
-        /voluntariado/colaboraciones/1/Aprobada/
+        <p>/voluntariado/colaboraciones/1/Aprobada/</p>
     </div>
-
 </section>
 
 {% endblock %}

@@ -19,47 +19,41 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 3 Plataformas de Animes 
-def comparador_plataformas(request):
+# Vista 4 Accesibilidad de los Animes 
+def buscador_accesibilidad(request):
     """
-    Muestra las plataformas activas y los animes que tienen
-    disponibles actualmente, incluyendo los idiomas.
+    Muestra los animes que disponen de alguna característica
+    de accesibilidad.
     """
 
     # QUERYSET ORM:
-    # Filtra plataformas activas con disponibilidades activas
-    # que todavía no tienen fecha de finalización.
-    # Cuenta los animes distintos asociados a cada plataforma.
-    plataformas = Plataforma.objects.filter(
-        activa=True,
-        disponibilidades__activo=True,
-        disponibilidades__fecha_fin__isnull=True
-    ).annotate(
-        total_animes=Count(
-            'disponibilidades__anime',
-            distinct=True
-        )
+    # Busca animes que tengan subtítulos CC, audiodescripción
+    # o lengua de signos.
+    # Se utiliza OR para aceptar cualquiera de las condiciones.
+    animes = Anime.objects.filter(
+        Q(accesibilidad__subtitulos_accesibles=True) |
+        Q(accesibilidad__audiodescripcion=True) |
+        Q(accesibilidad__lengua_signos=True)
+    ).select_related(
+        'accesibilidad'
     ).prefetch_related(
-        'disponibilidades__anime',
-        'disponibilidades__idioma'
-    ).order_by('nombre')
+        'accesibilidad__tipos_discapacidad'
+    ).distinct().order_by('titulo')
 
     # SQL RAW:
-    # plataformas = Plataforma.objects.raw(
-    #     "SELECT p.*, "
-    #     "COUNT(DISTINCT d.anime_id) AS total_animes "
-    #     "FROM AniAccess_plataforma p "
-    #     "INNER JOIN AniAccess_disponibilidad d "
-    #     "ON d.plataforma_id = p.id "
-    #     "WHERE p.activa = 1 "
-    #     "AND d.activo = 1 "
-    #     "AND d.fecha_fin IS NULL "
-    #     "GROUP BY p.id "
-    #     "ORDER BY p.nombre"
+    # animes = Anime.objects.raw(
+    #     "SELECT DISTINCT a.* "
+    #     "FROM AniAccess_anime a "
+    #     "INNER JOIN AniAccess_accesibilidad ac "
+    #     "ON ac.anime_id = a.id "
+    #     "WHERE ac.subtitulos_cc = 1 "
+    #     "OR ac.audiodescripcion = 1 "
+    #     "OR ac.lengua_signos = 1 "
+    #     "ORDER BY a.titulo"
     # )
 
     return render(
         request,
-        'AniAccess/comparador_plataformas.html',
-        {'plataformas': plataformas}
+        'AniAccess/buscador_accesibilidad.html',
+        {'animes': animes}
     )

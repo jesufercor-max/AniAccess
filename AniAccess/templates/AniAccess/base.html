@@ -16,7 +16,7 @@
             </a>
             <nav class="main-nav">
                 <a href="{% url 'index' %}">Inicio</a>
-                <a href="{% url 'comparador_plataformas' %}">Plataformas</a>
+                <a href="{% url 'buscador_accesibilidad' %}">Accesibilidad</a>
             </nav>
         </div>
     </header>
@@ -25,8 +25,10 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="container">
-        <p>AniAccess · Anime accesible para todas las personas.</p>
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>AniAccess · Anime accesible para todas las personas.</p>
+        </div>
     </footer>
 </body>
 </html>

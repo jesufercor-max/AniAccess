@@ -1,76 +1,69 @@
-# Rama 3 - Comparador de plataformas
+# Rama 4 - Buscador de accesibilidad
 
 ## Información general
 
-- **Nombre de la rama:** URL_Plataformas
-- **URL:** `/plataformas/`
-- **Vista:** `comparador_plataformas`
-- **Plantilla:** `comparador_plataformas.html`
+- **Nombre de la rama:** URL_Accesibilidad
+- **URL:** `/accesibilidad/`
+- **Vista:** `buscador_accesibilidad`
+- **Plantilla:** `buscador_accesibilidad.html`
 
 ## Objetivo
 
-Mostrar las plataformas activas y sus animes disponibles,
-incluyendo información sobre idiomas, subtítulos y doblaje.
+Mostrar los animes que disponen de características de accesibilidad,
+como subtítulos descriptivos, audiodescripción y lengua de signos.
 
 ## QuerySet utilizado
 
-Se utiliza `Plataforma.objects.filter()` para obtener las
-plataformas que tienen disponibilidades activas y vigentes.
+Se utiliza `Anime.objects.filter()` con expresiones Q.
 
 ### Operaciones utilizadas
 
-- `filter()`: filtra plataformas y disponibilidades activas.
-- `fecha_fin__isnull=True`: selecciona disponibilidades
-  sin fecha de finalización.
-- `annotate()`: añade el número de animes disponibles.
-- `Count()`: cuenta los animes asociados.
-- `distinct=True`: evita contar un mismo anime varias veces.
-- `prefetch_related()`: carga animes e idiomas relacionados.
-- `order_by()`: ordena las plataformas alfabéticamente.
+- `Q()`: permite construir filtros complejos.
+- OR (`|`): obtiene animes que cumplan al menos una condición.
+- `select_related()`: carga la relación OneToOne de accesibilidad.
+- `prefetch_related()`: carga los tipos de discapacidad relacionados.
+- `distinct()`: evita duplicados.
+- `order_by()`: ordena los animes por título.
 
 ## SQL RAW
 
-La vista incluye una consulta SQL equivalente mediante
-`Plataforma.objects.raw()`.
+Se incluye una consulta SQL equivalente mediante
+`Anime.objects.raw()`.
 
-La consulta RAW está comentada y no se ejecuta.
-La consulta ORM es la utilizada por la página.
+Está comentada y no se ejecuta. La consulta ORM es la utilizada.
 
 ## Relaciones utilizadas
 
-- Plataforma y Disponibilidad: relación inversa ManyToOne.
-- Disponibilidad y Anime: ManyToOne.
-- Disponibilidad e Idioma: ManyToOne.
+- Anime y Accesibilidad: OneToOne.
+- Accesibilidad y TipoDiscapacidad: ManyToMany.
 
 ## Plantilla HTML
 
-Se muestra:
+Muestra:
 
-- Nombre y logo de la plataforma.
-- Descripción y página web.
-- Estado de actividad.
-- Número de animes disponibles.
-- Títulos y títulos originales.
-- Idiomas.
-- Subtítulos y doblaje.
-- Fechas de disponibilidad.
+- Título e imagen del anime.
+- Título original y sinopsis.
+- Disponibilidad de subtítulos CC.
+- Disponibilidad de audiodescripción.
+- Disponibilidad de lengua de signos.
+- Tipos de discapacidad asociados.
+- Enlace a la ficha completa.
 
 ## Prueba
 
 Acceder a:
 
-`http://127.0.0.1:8000/plataformas/`
+`http://127.0.0.1:8000/accesibilidad/`
 
-Para mostrar resultados deben existir plataformas activas
-con disponibilidades activas y fecha_fin nula.
+Deben existir animes con registros asociados en Accesibilidad.
 
 ## Fusión
 
 ```bash
 git add .
-git commit -m "Añadir comparador de plataformas"
-git push -u origin URL_Plataformas
+git commit -m "Añadir buscador de accesibilidad"
+git push -u origin URL_Accesibilidad
 
 git switch URLs
-git merge URL_Plataformas
+git merge URL_Accesibilidad
 git push origin URLs

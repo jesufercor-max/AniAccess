@@ -3,5 +3,5 @@ from .import views
 
 urlpatterns = [
     path('', views.index ,name='index'),
-    path('plataformas/',views.comparador_plataformas,name='comparador_plataformas'),
+    path('accesibilidad/',views.buscador_accesibilidad,name='buscador_accesibilidad'),
 ]
