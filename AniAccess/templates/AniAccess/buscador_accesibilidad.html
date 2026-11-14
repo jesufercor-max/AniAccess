@@ -1,0 +1,50 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Buscador de accesibilidad | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">ANIME INCLUSIVO</span>
+    <h1>Buscador de accesibilidad</h1>
+    <p>Encuentra animes que incorporan herramientas de accesibilidad para disfrutar de una experiencia adaptada.</p>
+</section>
+
+<div class="anime-grid">
+    {% for anime in animes %}
+        <article class="anime-card">
+            {% if anime.imagen %}
+                <img src="{{ anime.imagen.url }}" alt="Portada de {{ anime.titulo }}">
+            {% else %}
+                <div class="image-placeholder">ANIACCESS</div>
+            {% endif %}
+
+            <div class="card-content">
+                <h2>{{ anime.titulo }}</h2>
+                <p>{{ anime.titulo_original }}</p>
+                <p>{{ anime.sinopsis|truncatewords:30 }}</p>
+
+                <div class="accessibility-list">
+                    <span>Subtítulos accesibles: {{ anime.accesibilidad.subtitulos_accesibles|yesno:"Sí,No" }}</span>
+                    <span>Audiodescripción: {{ anime.accesibilidad.audiodescripcion|yesno:"Sí,No" }}</span>
+                    <span>Lengua de signos: {{ anime.accesibilidad.lengua_signos|yesno:"Sí,No" }}</span>
+                </div>
+
+                {% for tipo in anime.accesibilidad.tipos_discapacidad.all %}
+                    <span class="badge">{{ tipo.nombre }}</span>
+                {% endfor %}
+
+                <div style="margin-top: 15px;">
+                    <a class="btn btn-primary" href="{% url 'detalle_anime' anime.id %}">Ver ficha completa</a>
+                </div>
+            </div>
+        </article>
+    {% empty %}
+        <div class="empty-state">
+            <h2>Sin resultados</h2>
+            <p>No se han encontrado animes con características de accesibilidad.</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

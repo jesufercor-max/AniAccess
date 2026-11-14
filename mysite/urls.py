@@ -15,8 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('AniAccess.urls')),
 ]
+
+# Permite servir las imágenes subidas (media) en modo desarrollo (DEBUG = True)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler400 = 'AniAccess.views.error_400'
+handler403 = 'AniAccess.views.error_403'
+handler404 = 'AniAccess.views.error_404'
+handler500 = 'AniAccess.views.error_500'

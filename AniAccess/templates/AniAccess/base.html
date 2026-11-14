@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AniAccess{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'AniAccess/css/estilos.css' %}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container navbar">
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo-symbol">◈</span>
+                <span>AniAccess</span>
+            </a>
+            <nav class="main-nav">
+                <a href="{% url 'index' %}">Inicio</a>
+                <a href="{% url 'catalogo_animes' %}">Animes</a>
+                <a href="{% url 'comparador_plataformas' %}">Plataformas</a>
+                <a href="{% url 'buscador_accesibilidad' %}">Accesibilidad</a>
+                <a href="{% url 'ranking_accesibilidad' %}">Ranking</a>
+                <a href="{% url 'ranking_voluntarios' %}">Voluntariado</a>
+                <a href="{% url 'catalogo_insignias' %}">Insignias</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>AniAccess · Anime accesible para todas las personas.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Plataformas | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">DÓNDE VER ANIME</span>
+    <h1>Comparador de plataformas</h1>
+    <p>
+        Consulta las plataformas con títulos disponibles y descubre
+        los idiomas, subtítulos y opciones de doblaje de cada anime.
+    </p>
+</section>
+
+<div class="data-grid">
+
+    {% for plataforma in plataformas %}
+
+    <article class="platform-card">
+
+        {% if plataforma.logo %}
+        <img src="{{ plataforma.logo.url }}" alt="Logo de {{ plataforma.nombre }}">
+        {% endif %}
+
+        <h2>{{ plataforma.nombre }}</h2>
+        <p>{{ plataforma.descripcion }}</p>
+
+        <div class="card-meta">
+            <span>{{ plataforma.total_animes }} animes disponibles</span>
+            <span>Activa: {{ plataforma.activa|yesno:"Sí,No" }}</span>
+        </div>
+
+        {% if plataforma.web %}
+        <p>
+            <a href="{{ plataforma.web }}" target="_blank" rel="noopener" class="btn btn-secondary">
+                Visitar plataforma ↗
+            </a>
+        </p>
+        {% endif %}
+
+        <h3 style="margin-top: 20px;">Catálogo disponible</h3>
+
+        {% for disponibilidad in plataforma.disponibilidades.all %}
+
+        {% if disponibilidad.activo and not disponibilidad.fecha_fin %}
+
+        <div class="availability-item">
+            <h3>{{ disponibilidad.anime.titulo }}</h3>
+            <p><strong>Título original:</strong> {{ disponibilidad.anime.titulo_original }}</p>
+            <p><strong>Idioma:</strong> {{ disponibilidad.idioma.nombre }} ({{ disponibilidad.idioma.codigo }})</p>
+            <p><strong>Subtítulos:</strong> {{ disponibilidad.subtitulos|yesno:"Sí,No" }} · <strong>Doblaje:</strong> {{
+                disponibilidad.doblaje|yesno:"Sí,No" }}</p>
+            <p><strong>Fecha de inicio:</strong> {{ disponibilidad.fecha_inicio|date:"d/m/Y" }}</p>
+
+            <a class="btn btn-primary" style="margin-top: 10px;"
+                href="{% url 'detalle_anime' disponibilidad.anime.id %}">
+                Ver anime
+            </a>
+        </div>
+
+        {% endif %}
+
+        {% empty %}
+
+        <p>No hay disponibilidades registradas.</p>
+
+        {% endfor %}
+
+    </article>
+
+    {% empty %}
+
+    <div class="empty-state">
+        <h2>Sin plataformas disponibles</h2>
+        <p>No hay plataformas con animes disponibles actualmente.</p>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

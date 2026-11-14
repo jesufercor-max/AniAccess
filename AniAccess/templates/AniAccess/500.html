@@ -1,0 +1,12 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Error 500 | AniAccess{% endblock %}
+
+{% block content %}
+<section class="empty-state">
+    <span class="eyebrow">ERROR 500</span>
+    <h1>Error interno del servidor</h1>
+    <p>Ha ocurrido un fallo inesperado en el sistema. Inténtalo de nuevo más tarde.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary" style="margin-top: 20px;">Volver al inicio</a>
+</section>
+{% endblock %}

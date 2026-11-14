@@ -1,0 +1,12 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Error 400 | AniAccess{% endblock %}
+
+{% block content %}
+<section class="empty-state">
+    <span class="eyebrow">ERROR 400</span>
+    <h1>Solicitud incorrecta</h1>
+    <p>El servidor no ha podido procesar la petición debido a un formato no válido.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary" style="margin-top: 20px;">Volver al inicio</a>
+</section>
+{% endblock %}

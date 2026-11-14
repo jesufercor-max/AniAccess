@@ -1,0 +1,87 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Inicio | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="eyebrow">PLATAFORMA DE ANIME ACCESIBLE</span>
+        <h1>El anime, sin barreras.</h1>
+        <p>
+            AniAccess reúne información sobre anime, plataformas,
+            opciones de accesibilidad y una comunidad colaborativa
+            para facilitar una experiencia inclusiva.
+        </p>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Explora AniAccess</h2>
+
+    <div class="data-grid">
+        <article class="feature-card">
+            <span class="feature-icon">▶</span>
+            <h3>Catálogo de animes</h3>
+            <p>Explora los animes en emisión y filtra por título u original.</p>
+            <a href="{% url 'catalogo_animes' %}" class="btn btn-primary">Ver catálogo</a>
+        </article>
+
+        <article class="feature-card">
+            <span class="feature-icon">⊞</span>
+            <h3>Plataformas</h3>
+            <p>Consulta dónde están disponibles los títulos, idiomas y doblajes.</p>
+            <a href="{% url 'comparador_plataformas' %}" class="btn btn-primary">Comparar</a>
+        </article>
+
+        <article class="feature-card">
+            <span class="feature-icon">♿</span>
+            <h3>Accesibilidad</h3>
+            <p>Encuentra títulos con subtítulos accesibles, audiodescripción o lengua de signos.</p>
+            <a href="{% url 'buscador_accesibilidad' %}" class="btn btn-primary">Buscar</a>
+        </article>
+
+        <article class="feature-card">
+            <span class="feature-icon">★</span>
+            <h3>Ranking de accesibilidad</h3>
+            <p>Descubre los animes mejor valorados por la comunidad.</p>
+            <a href="{% url 'ranking_accesibilidad' %}" class="btn btn-primary">Ver ranking</a>
+        </article>
+
+        <article class="feature-card">
+            <span class="feature-icon">◈</span>
+            <h3>Voluntariado</h3>
+            <p>Conoce a las personas que colaboran haciendo el anime más inclusivo.</p>
+            <a href="{% url 'ranking_voluntarios' %}" class="btn btn-primary">Ver voluntarios</a>
+        </article>
+
+        <article class="feature-card">
+            <span class="feature-icon">✦</span>
+            <h3>Insignias</h3>
+            <p>Consulta los logros y reconocimientos de la comunidad colaborativa.</p>
+            <a href="{% url 'catalogo_insignias' %}" class="btn btn-primary">Ver insignias</a>
+        </article>
+    </div>
+</section>
+
+<section class="info-card content-section">
+    <h2>Accesos directos de ejemplo</h2>
+    <p>Haz clic para consultar perfiles de usuario, colecciones de favoritos o colaboraciones reales:</p>
+
+    <div class="availability-item">
+        <strong>Perfil de usuario (elena_sub)</strong>
+        <p><a href="{% url 'perfil_usuario' 'elena_sub' %}" class="btn btn-secondary" style="margin-top: 8px;">Ver perfil →</a></p>
+    </div>
+
+    <div class="availability-item">
+        <strong>Favoritos de usuario (elena_sub)</strong>
+        <p><a href="{% url 'animes_favoritos' 'elena_sub' %}" class="btn btn-secondary" style="margin-top: 8px;">Ver favoritos →</a></p>
+    </div>
+
+    <div class="availability-item">
+        <strong>Detalle de colaboración (#1 Aprobada)</strong>
+        <p><a href="{% url 'detalle_colaboracion' 1 'Aprobada' %}" class="btn btn-secondary" style="margin-top: 8px;">Ver colaboración →</a></p>
+    </div>
+</section>
+
+{% endblock %}
