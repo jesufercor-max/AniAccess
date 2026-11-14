@@ -1,0 +1,14 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Error 403 | AniAccess{% endblock %}
+
+{% block content %}
+<section class="empty-state">
+    <span class="eyebrow">ERROR 403</span>
+    <h1>Acceso denegado</h1>
+    <p>No tienes permisos suficientes para acceder a esta sección de AniAccess.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary" style="margin-top: 20px;">
+        Volver al inicio
+    </a>
+</section>
+{% endblock %}

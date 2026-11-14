@@ -1,0 +1,14 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Error 404 | AniAccess{% endblock %}
+
+{% block content %}
+<section class="empty-state">
+    <span class="eyebrow">ERROR 404</span>
+    <h1>Página no encontrada</h1>
+    <p>La ruta o el contenido que buscas no existe o ha sido movido.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary" style="margin-top: 20px;">
+        Volver al inicio
+    </a>
+</section>
+{% endblock %}

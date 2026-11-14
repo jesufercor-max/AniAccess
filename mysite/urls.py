@@ -22,3 +22,9 @@ urlpatterns = [
     path('', include('AniAccess.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
+
+# Manejadores de errores personalizados
+handler400 = 'AniAccess.views.error_400'
+handler403 = 'AniAccess.views.error_403'
+handler404 = 'AniAccess.views.error_404'
+handler500 = 'AniAccess.views.error_500'
