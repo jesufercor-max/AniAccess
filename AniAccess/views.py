@@ -19,51 +19,39 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 8 Ranking de Voluntarios
-def ranking_voluntarios(request):
+# Vista 9 Información de las colaboraciones 
+def detalle_colaboracion(request, id, estado):
     """
-    Muestra un ranking de voluntarios disponibles,
-    ordenados por sus puntos y colaboraciones aprobadas.
+    Muestra la información completa de una colaboración,
+    identificándola mediante su ID y su estado.
     """
 
     # QUERYSET ORM:
-    # Filtra voluntarios disponibles, cuenta sus colaboraciones aprobadas
-    # mediante Count con filtro Q, y precarga usuario, insignias y colaboraciones.
-    voluntarios = Voluntario.objects.filter(
-        disponible=True
-    ).select_related(
-        'usuario'
-    ).prefetch_related(
-        'insignias',
-        'colaboraciones'
-    ).annotate(
-        total_colaboraciones=Count(
-            'colaboraciones',
-            filter=Q(colaboraciones__estado='Aprobada'),
-            distinct=True
-        )
-    ).order_by(
-        '-puntos',
-        '-total_colaboraciones'
-    )[:10]
+    # Busca la colaboración por su identificador y estado.
+    # select_related carga el voluntario y el usuario asociado
+    # en la misma consulta mediante JOIN.
+    colaboracion = get_object_or_404(
+        Colaboracion.objects.select_related(
+            'voluntario__usuario'
+        ),
+        id=id,
+        estado=estado
+    )
 
     # SQL RAW:
-    # voluntarios = Voluntario.objects.raw(
-    #     """
-    #     SELECT v.*,
-    #     COUNT(DISTINCT CASE WHEN c.estado = 'Aprobada' THEN c.id END) AS total_colaboraciones
-    #     FROM AniAccess_voluntario v
-    #     INNER JOIN AniAccess_usuario u ON u.id = v.usuario_id
-    #     LEFT JOIN AniAccess_colaboracion c ON c.voluntario_id = v.id
-    #     WHERE v.disponible = 1
-    #     GROUP BY v.id
-    #     ORDER BY v.puntos DESC, total_colaboraciones DESC
-    #     LIMIT 10
-    #     """
+    # colaboracion = Colaboracion.objects.raw(
+    #     "SELECT c.* "
+    #     "FROM AniAccess_colaboracion c "
+    #     "INNER JOIN AniAccess_voluntario v "
+    #     "ON v.id = c.voluntario_id "
+    #     "INNER JOIN AniAccess_usuario u "
+    #     "ON u.id = v.usuario_id "
+    #     "WHERE c.id = %s AND c.estado = %s",
+    #     [id, estado]
     # )
 
     return render(
         request,
-        'AniAccess/ranking_voluntarios.html',
-        {'voluntarios': voluntarios}
+        'AniAccess/detalle_colaboracion.html',
+        {'colaboracion': colaboracion}
     )

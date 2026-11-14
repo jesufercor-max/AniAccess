@@ -3,5 +3,5 @@ from .import views
 
 urlpatterns = [
     path('', views.index ,name='index'),
-    path('voluntariado/',views.ranking_voluntarios,name='ranking_voluntarios'),
+    path('voluntariado/colaboraciones/<int:id>/<str:estado>/', views.detalle_colaboracion, name='detalle_colaboracion'),
 ]
