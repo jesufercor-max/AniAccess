@@ -1,47 +1,32 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{% block title %}AniAccess{% endblock %}</title>
-
     <link rel="stylesheet" href="{% static 'AniAccess/css/estilos.css' %}">
 </head>
-
 <body>
-
-<header class="main-header">
-    <div class="container navbar">
-        <a href="{% url 'index' %}" class="logo">
-            <span class="logo-symbol">A</span>
-            <span>AniAccess</span>
-        </a>
-
-        <nav class="main-nav">
-            <a href="{% url 'index' %}">Inicio</a>
-            <a href="{% url 'catalogo_animes' %}">Animes</a>
-        </nav>
-    </div>
-</header>
-
-<main class="container main-content">
-    {% block content %}
-    {% endblock %}
-</main>
-
-<footer class="main-footer">
-    <div class="container footer-content">
-        <div>
-            <h2>AniAccess</h2>
-            <p>El anime accesible para todas las personas.</p>
+    <header class="main-header">
+        <div class="container navbar">
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo-symbol">◈</span>
+                <span>AniAccess</span>
+            </a>
+            <nav class="main-nav">
+                <a href="{% url 'index' %}">Inicio</a>
+                <a href="{% url 'comparador_plataformas' %}">Plataformas</a>
+            </nav>
         </div>
+    </header>
 
-        <p>Proyecto educativo · Desarrollo de Aplicaciones Web</p>
-    </div>
-</footer>
+    <main class="main-content container">
+        {% block content %}{% endblock %}
+    </main>
 
+    <footer class="container">
+        <p>AniAccess · Anime accesible para todas las personas.</p>
+    </footer>
 </body>
 </html>

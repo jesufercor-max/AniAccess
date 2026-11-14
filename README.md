@@ -1,80 +1,76 @@
-# Rama 2 - Detalle de anime
+# Rama 3 - Comparador de plataformas
 
 ## Información general
 
-- **Nombre de la rama:** URL_Detalle-Anime
-- **URL:** `/anime/<int:id>/`
-- **Vista:** `detalle_anime`
-- **Plantilla:** `detalle_anime.html`
+- **Nombre de la rama:** URL_Plataformas
+- **URL:** `/plataformas/`
+- **Vista:** `comparador_plataformas`
+- **Plantilla:** `comparador_plataformas.html`
 
 ## Objetivo
 
-Mostrar la ficha completa de un anime, incluyendo su información
-general, plataformas, disponibilidades por idioma, accesibilidad
-y valoraciones realizadas por los usuarios.
+Mostrar las plataformas activas y sus animes disponibles,
+incluyendo información sobre idiomas, subtítulos y doblaje.
 
 ## QuerySet utilizado
 
-Se utiliza `get_object_or_404()` junto con un QuerySet de Anime. (Este error se implementa el la rama URLs)
+Se utiliza `Plataforma.objects.filter()` para obtener las
+plataformas que tienen disponibilidades activas y vigentes.
 
 ### Operaciones utilizadas
 
-- `select_related()`: carga la relación OneToOne de accesibilidad.
-- `prefetch_related()`: carga plataformas, disponibilidades,
-  idiomas, valoraciones y tipos de discapacidad.
-- `annotate()`: añade cálculos a cada anime.
-- `Count()`: cuenta las valoraciones.
-- `Avg()`: calcula la media de accesibilidad.
-- `distinct=True`: evita contar valoraciones duplicadas
-  cuando se realizan uniones con otras relaciones.
+- `filter()`: filtra plataformas y disponibilidades activas.
+- `fecha_fin__isnull=True`: selecciona disponibilidades
+  sin fecha de finalización.
+- `annotate()`: añade el número de animes disponibles.
+- `Count()`: cuenta los animes asociados.
+- `distinct=True`: evita contar un mismo anime varias veces.
+- `prefetch_related()`: carga animes e idiomas relacionados.
+- `order_by()`: ordena las plataformas alfabéticamente.
 
 ## SQL RAW
 
 La vista incluye una consulta SQL equivalente mediante
-`Anime.objects.raw()`.
+`Plataforma.objects.raw()`.
 
-La consulta RAW está comentada. La consulta ORM es la que se ejecuta.
-Las relaciones múltiples se cargan mediante consultas adicionales
-en el ORM.
+La consulta RAW está comentada y no se ejecuta.
+La consulta ORM es la utilizada por la página.
 
 ## Relaciones utilizadas
 
-- Anime y Accesibilidad: OneToOne.
-- Anime y Plataforma: ManyToMany mediante Disponibilidad.
+- Plataforma y Disponibilidad: relación inversa ManyToOne.
+- Disponibilidad y Anime: ManyToOne.
 - Disponibilidad e Idioma: ManyToOne.
-- Anime y Valoracion: ManyToOne.
-- Valoracion y Usuario: ManyToOne.
-- Accesibilidad y TipoDiscapacidad: ManyToMany.
 
 ## Plantilla HTML
 
-La plantilla muestra:
+Se muestra:
 
-- Información general del anime.
-- Imagen, título y sinopsis.
-- Año, episodios, tipo y estado.
-- Estadísticas de valoraciones.
-- Plataformas relacionadas.
-- Disponibilidades e idiomas.
-- Opciones de accesibilidad.
-- Tipos de discapacidad.
-- Valoraciones y usuarios que las realizan.
+- Nombre y logo de la plataforma.
+- Descripción y página web.
+- Estado de actividad.
+- Número de animes disponibles.
+- Títulos y títulos originales.
+- Idiomas.
+- Subtítulos y doblaje.
+- Fechas de disponibilidad.
 
 ## Prueba
 
 Acceder a:
 
-`http://127.0.0.1:8000/anime/3/`
+`http://127.0.0.1:8000/plataformas/`
 
-El identificador debe corresponder a un anime existente.
+Para mostrar resultados deben existir plataformas activas
+con disponibilidades activas y fecha_fin nula.
 
 ## Fusión
 
 ```bash
 git add .
-git commit -m "Añadir detalle completo de anime"
-git push -u origin URL_Detalle-Anime
+git commit -m "Añadir comparador de plataformas"
+git push -u origin URL_Plataformas
 
 git switch URLs
-git merge URL_Detalle-Anime
+git merge URL_Plataformas
 git push origin URLs
