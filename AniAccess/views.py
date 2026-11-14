@@ -19,41 +19,46 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 4 Accesibilidad de los Animes 
-def buscador_accesibilidad(request):
+# Vista 5 Perfil de Usuario 
+def perfil_usuario(request, nombre):
     """
-    Muestra los animes que disponen de alguna característica
-    de accesibilidad.
+    Muestra el perfil de un usuario, sus preferencias de accesibilidad,
+    valoraciones y datos de voluntariado.
     """
 
     # QUERYSET ORM:
-    # Busca animes que tengan subtítulos CC, audiodescripción
-    # o lengua de signos.
-    # Se utiliza OR para aceptar cualquiera de las condiciones.
-    animes = Anime.objects.filter(
-        Q(accesibilidad__subtitulos_accesibles=True) |
-        Q(accesibilidad__audiodescripcion=True) |
-        Q(accesibilidad__lengua_signos=True)
-    ).select_related(
-        'accesibilidad'
-    ).prefetch_related(
-        'accesibilidad__tipos_discapacidad'
-    ).distinct().order_by('titulo')
+    # select_related carga las relaciones OneToOne.
+    # prefetch_related carga las valoraciones, preferencias,
+    # insignias y colaboraciones.
+    usuario = get_object_or_404(
+        Usuario.objects
+        .select_related(
+            'perfil_accesibilidad',
+            'voluntario',
+        )
+        .prefetch_related(
+            'perfil_accesibilidad__tipos_discapacidad',
+            'valoraciones__anime',
+            'voluntario__insignias',
+            'voluntario__colaboraciones',
+        ),
+        nombre_usuario=nombre
+    )
 
     # SQL RAW:
-    # animes = Anime.objects.raw(
-    #     "SELECT DISTINCT a.* "
-    #     "FROM AniAccess_anime a "
-    #     "INNER JOIN AniAccess_accesibilidad ac "
-    #     "ON ac.anime_id = a.id "
-    #     "WHERE ac.subtitulos_cc = 1 "
-    #     "OR ac.audiodescripcion = 1 "
-    #     "OR ac.lengua_signos = 1 "
-    #     "ORDER BY a.titulo"
+    # usuario = Usuario.objects.raw(
+    #     "SELECT u.* "
+    #     "FROM AniAccess_usuario u "
+    #     "LEFT JOIN AniAccess_perfilaccesibilidad pa "
+    #     "ON pa.usuario_id = u.id "
+    #     "LEFT JOIN AniAccess_voluntario v "
+    #     "ON v.usuario_id = u.id "
+    #     "WHERE u.nombre_usuario = %s",
+    #     [nombre]
     # )
 
     return render(
         request,
-        'AniAccess/buscador_accesibilidad.html',
-        {'animes': animes}
+        'AniAccess/perfil_usuario.html',
+        {'usuario': usuario}
     )

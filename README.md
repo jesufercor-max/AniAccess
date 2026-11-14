@@ -1,69 +1,65 @@
-# Rama 4 - Buscador de accesibilidad
+# Rama 5 - Perfil de usuario
 
 ## Información general
 
-- **Nombre de la rama:** URL_Accesibilidad
-- **URL:** `/accesibilidad/`
-- **Vista:** `buscador_accesibilidad`
-- **Plantilla:** `buscador_accesibilidad.html`
+- **Nombre de la rama:** URL_Perfil-Usuario
+- **URL:** `/usuarios/<str:nombre>/`
+- **Vista:** `perfil_usuario`
+- **Plantilla:** `perfil_usuario.html`
 
 ## Objetivo
 
-Mostrar los animes que disponen de características de accesibilidad,
-como subtítulos descriptivos, audiodescripción y lengua de signos.
+Mostrar la información de un usuario, sus preferencias de accesibilidad,
+valoraciones y actividad como voluntario.
 
 ## QuerySet utilizado
 
-Se utiliza `Anime.objects.filter()` con expresiones Q.
+Se utiliza `Usuario.objects.select_related()` y `prefetch_related()`.
 
 ### Operaciones utilizadas
 
-- `Q()`: permite construir filtros complejos.
-- OR (`|`): obtiene animes que cumplan al menos una condición.
-- `select_related()`: carga la relación OneToOne de accesibilidad.
-- `prefetch_related()`: carga los tipos de discapacidad relacionados.
-- `distinct()`: evita duplicados.
-- `order_by()`: ordena los animes por título.
+- `get_object_or_404()`: obtiene el usuario o devuelve un error 404.
+- `select_related()`: carga las relaciones OneToOne.
+- `prefetch_related()`: carga las relaciones inversas y ManyToMany.
 
 ## SQL RAW
 
-Se incluye una consulta SQL equivalente mediante
-`Anime.objects.raw()`.
-
-Está comentada y no se ejecuta. La consulta ORM es la utilizada.
+Se incluye una consulta SQL mediante `Usuario.objects.raw()`.
+Está comentada como alternativa didáctica. La consulta ORM es la ejecutada.
 
 ## Relaciones utilizadas
 
-- Anime y Accesibilidad: OneToOne.
-- Accesibilidad y TipoDiscapacidad: ManyToMany.
+- Usuario y PerfilAccesibilidad: OneToOne.
+- Usuario y Voluntario: OneToOne.
+- Usuario y Valoracion: relación inversa ManyToOne.
+- PerfilAccesibilidad y TipoDiscapacidad: ManyToMany.
+- Voluntario e Insignia: ManyToMany.
+- Voluntario y Colaboracion: relación inversa ManyToOne.
 
 ## Plantilla HTML
 
 Muestra:
 
-- Título e imagen del anime.
-- Título original y sinopsis.
-- Disponibilidad de subtítulos CC.
-- Disponibilidad de audiodescripción.
-- Disponibilidad de lengua de signos.
-- Tipos de discapacidad asociados.
-- Enlace a la ficha completa.
+- Datos del usuario.
+- Preferencias de accesibilidad.
+- Tipos de discapacidad.
+- Valoraciones realizadas.
+- Información del voluntario.
+- Insignias y colaboraciones.
 
 ## Prueba
 
-Acceder a:
+`http://127.0.0.1:8000/usuarios/elena_sub/`
 
-`http://127.0.0.1:8000/accesibilidad/`
-
-Deben existir animes con registros asociados en Accesibilidad.
+Sustituir `nombre_usuario` por un usuario existente (elena_sub).
 
 ## Fusión
 
 ```bash
 git add .
-git commit -m "Añadir buscador de accesibilidad"
-git push -u origin URL_Accesibilidad
+git commit -m "Añadir perfil de usuario"
+git push -u originURL_Perfil-Usuario
 
 git switch URLs
-git merge URL_Accesibilidad
+git mergeURL_Perfil-Usuario
 git push origin URLs

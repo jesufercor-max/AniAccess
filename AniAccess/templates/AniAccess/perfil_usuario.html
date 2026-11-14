@@ -1,0 +1,155 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}{{ usuario.nombre_usuario }} | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">PERFIL DE USUARIO</span>
+    <h1>{{ usuario.nombre_usuario }}</h1>
+    <p>Información de la cuenta, preferencias de accesibilidad y actividad en la comunidad.</p>
+</section>
+
+<div class="data-grid">
+
+    <article class="info-card">
+        <h2>Datos de la cuenta</h2>
+
+        <div class="availability-item">
+            <strong>Nombre de usuario</strong>
+            <p>{{ usuario.nombre_usuario }}</p>
+        </div>
+
+        <div class="availability-item">
+            <strong>Correo electrónico</strong>
+            <p>{{ usuario.email }}</p>
+        </div>
+
+        <div class="availability-item">
+            <strong>Fecha de registro</strong>
+            <p>{{ usuario.fecha_registro|date:"d/m/Y" }}</p>
+        </div>
+
+        <div class="availability-item">
+            <strong>Fecha de nacimiento</strong>
+            <p>{{ usuario.fecha_nacimiento|date:"d/m/Y"|default:"No indicada" }}</p>
+        </div>
+
+        <div class="availability-item">
+            <strong>Cuenta activa</strong>
+            <p>{{ usuario.activo|yesno:"Sí,No" }}</p>
+        </div>
+    </article>
+
+    <article class="info-card">
+        <h2>Preferencias de accesibilidad</h2>
+
+        {% if usuario.perfil_accesibilidad %}
+
+            {% if usuario.perfil_accesibilidad.descripcion %}
+                <p style="margin-top: 10px;">{{ usuario.perfil_accesibilidad.descripcion }}</p>
+            {% endif %}
+
+            <div class="availability-item">
+                <strong>Subtítulos accesibles</strong>
+                <p>{{ usuario.perfil_accesibilidad.preferencia_subtitulos|yesno:"Sí,No" }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Audiodescripción</strong>
+                <p>{{ usuario.perfil_accesibilidad.preferencia_audiodescripcion|yesno:"Sí,No" }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Lengua de signos</strong>
+                <p>{{ usuario.perfil_accesibilidad.preferencia_lengua_signos|yesno:"Sí,No" }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Doblaje</strong>
+                <p>{{ usuario.perfil_accesibilidad.preferencia_doblaje|yesno:"Sí,No" }}</p>
+            </div>
+
+            <div class="availability-item">
+                <strong>Descripción de sonidos</strong>
+                <p>{{ usuario.perfil_accesibilidad.preferencia_descripcion_sonidos|yesno:"Sí,No" }}</p>
+            </div>
+
+            <h3 style="margin-top: 20px;">Tipos de discapacidad</h3>
+
+            {% for tipo in usuario.perfil_accesibilidad.tipos_discapacidad.all %}
+                <div class="availability-item">
+                    <strong>{{ tipo.nombre }}</strong>
+                    <p>{{ tipo.descripcion }}</p>
+                    <p>Activo: {{ tipo.activo|yesno:"Sí,No" }}</p>
+                </div>
+            {% empty %}
+                <p>No hay preferencias adicionales.</p>
+            {% endfor %}
+
+        {% else %}
+            <p>El usuario todavía no ha configurado su perfil de accesibilidad.</p>
+        {% endif %}
+    </article>
+
+</div>
+
+<section class="info-card content-section">
+    <h2>Valoraciones realizadas</h2>
+
+    {% for valoracion in usuario.valoraciones.all %}
+        <div class="availability-item">
+            <h3>{{ valoracion.anime.titulo }}</h3>
+            <p><strong>Accesibilidad general:</strong> {{ valoracion.accesibilidad_general }}/5</p>
+            <p>{{ valoracion.comentario }}</p>
+            <p><strong>Fecha:</strong> {{ valoracion.fecha|date:"d/m/Y" }}</p>
+            <p><strong>Visible:</strong> {{ valoracion.visible|yesno:"Sí,No" }}</p>
+        </div>
+    {% empty %}
+        <p>Este usuario todavía no ha realizado valoraciones.</p>
+    {% endfor %}
+</section>
+
+{% if usuario.voluntario %}
+    <section class="info-card content-section">
+        <h2>Información de voluntariado</h2>
+
+        <div class="availability-item">
+            <p><strong>Nombre público:</strong> {{ usuario.voluntario.nombre_publico }}</p>
+            <p><strong>Descripción:</strong> {{ usuario.voluntario.descripcion }}</p>
+            <p><strong>Especialidad:</strong> {{ usuario.voluntario.especialidad }}</p>
+            <p><strong>Fecha de alta:</strong> {{ usuario.voluntario.fecha_alta|date:"d/m/Y" }}</p>
+            <p><strong>Disponible:</strong> {{ usuario.voluntario.disponible|yesno:"Sí,No" }}</p>
+            <p><strong>Puntos:</strong> {{ usuario.voluntario.puntos }}</p>
+            <p><strong>Colaboraciones completadas:</strong> {{ usuario.voluntario.colaboraciones_completadas }}</p>
+        </div>
+
+        <h3 style="margin-top: 20px;">Insignias</h3>
+
+        {% for insignia in usuario.voluntario.insignias.all %}
+            <div class="availability-item">
+                <strong>{{ insignia.nombre }}</strong>
+                <p>{{ insignia.descripcion }}</p>
+                <p>Puntos necesarios: {{ insignia.puntos_necesarios }}</p>
+            </div>
+        {% empty %}
+            <p>Todavía no tiene insignias.</p>
+        {% endfor %}
+
+        <h3 style="margin-top: 20px;">Colaboraciones</h3>
+
+        {% for colaboracion in usuario.voluntario.colaboraciones.all %}
+            <div class="availability-item">
+                <strong>{{ colaboracion.titulo }}</strong>
+                <p>{{ colaboracion.descripcion }}</p>
+                <p>Tipo: {{ colaboracion.tipo }}</p>
+                <p>Estado: {{ colaboracion.estado }}</p>
+                <p>Puntos: {{ colaboracion.puntos_obtenidos }}</p>
+            </div>
+        {% empty %}
+            <p>No tiene colaboraciones registradas.</p>
+        {% endfor %}
+    </section>
+{% endif %}
+
+{% endblock %}
