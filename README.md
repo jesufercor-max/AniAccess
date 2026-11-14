@@ -1,67 +1,76 @@
-# Rama 6 - Animes favoritos
+# Rama 7 - Ranking de accesibilidad
 
 ## Información general
 
-- **Nombre de la rama:** URL_Animes-Favoritos
-- **URL:** `/usuarios/<str:nombre>/favoritos/`
-- **Vista:** `animes_favoritos`
-- **Plantilla:** `animes_favoritos.html`
+- **Nombre de la rama:** URL_Ranking-Accesibilidad
+- **URL:** `/ranking-accesibilidad/`
+- **Vista:** `ranking_accesibilidad`
+- **Plantilla:** `ranking_accesibilidad.html`
 
 ## Objetivo
 
-Mostrar los animes que un usuario ha añadido a su lista de favoritos y permitir filtrar la colección mediante un buscador por título o título original.
+Mostrar los animes mejor valorados por su accesibilidad,
+utilizando las puntuaciones de accesibilidad general realizadas por los usuarios.
 
 ## QuerySet utilizado
 
-Se utiliza la relación ManyToMany entre `Anime` y `Usuario`, combinando condiciones con objetos `Q` para la búsqueda dinámica.
+Se utiliza `Anime.objects.annotate()` sobre la relación inversa `valoraciones` para calcular estadísticas agregadas de cada título.
 
 ### Operaciones utilizadas
 
-- `get_object_or_404()`: obtiene el usuario a partir de su `nombre_usuario`.
-- `filter()` y objetos `Q`: filtra los animes relacionados con el usuario y aplica búsqueda insensible a mayúsculas (`icontains`) por `titulo` o `titulo_original`.
-- `prefetch_related()`: optimiza la carga de `plataformas` y `disponibilidades__idioma`.
-- `order_by()`: ordena los títulos alfabéticamente.
+- `annotate()`: añade los campos calculados `total_valoraciones` y `media_puntuacion` al QuerySet.
+- `Count('valoraciones', distinct=True)`: cuenta el total de valoraciones distintas recibidas por cada anime.
+- `Avg('valoraciones__accesibilidad_general')`: calcula la puntuación media de accesibilidad general.
+- `filter()`: filtra los resultados agregados (`total_valoraciones__gte=1` y `media_puntuacion__gte=3`).
+- `order_by()`: ordena de forma descendente por puntuación media (`-media_puntuacion`) y, en caso de empate, por número de valoraciones (`-total_valoraciones`).
+- Slicing `[:10]`: limita el ranking a los diez mejores resultados.
+
+## Filtro de agregado
+
+El filtro se aplica después de `annotate()`:
+
+`total_valoraciones__gte=1, media_puntuacion__gte=3`
+
+En SQL equivale a utilizar `HAVING`, porque filtra los resultados
+de una función de agregación tras agrupar por anime.
 
 ## SQL RAW
 
-Se incluye una consulta equivalente mediante `Anime.objects.raw()` con unión (`INNER JOIN`) a la tabla intermedia `AniAccess_anime_usuarios_favoritos` y filtrado por `LIKE`.
+La vista incluye una consulta SQL equivalente con `INNER JOIN` a `AniAccess_valoracion`, `GROUP BY` y `HAVING`.
 Está comentada y no se ejecuta.
 
 ## Relaciones utilizadas
 
-- `Anime` y `Usuario`: ManyToMany mediante `usuarios_favoritos`.
-- `Anime` y `Plataforma`: ManyToMany mediante `Disponibilidad`.
-- `Disponibilidad` e `Idioma`: ManyToOne.
+- `Anime` y `Valoracion`: relación inversa ManyToOne mediante `related_name="valoraciones"`.
+- `Valoracion` contiene el campo `accesibilidad_general` utilizado para el cálculo de la media.
 
 ## Plantilla HTML
 
 Muestra:
 
-- Cabecera con el nombre del usuario y formulario de búsqueda (`GET`).
-- Título e imagen del anime (con marcador visual si no tiene imagen).
-- Sinopsis y título original.
-- Año de estreno, número de episodios, tipo y estado.
-- Plataformas disponibles.
-- Disponibilidades por idioma (indicando subtítulos, doblaje y estado activo).
-- Enlace al detalle del anime (comentado con `{% comment %}` para evitar `NoReverseMatch` hasta integrar la vista de detalle).
+- Cabecera de sección y listado estructurado con tarjetas de ranking (`ranking-list` y `ranking-card`).
+- Posición en el ranking (`#1`, `#2`, etc.) mediante `forloop.counter`.
+- Título e imagen del anime (con marcador visual `ANIACCESS` si no tiene imagen asignada).
+- Sinopsis resumida.
+- Media de accesibilidad formateada a dos decimales (`floatformat:2`) y total de valoraciones.
+- Año de estreno y estado del anime.
+- Enlace a la ficha del anime (comentado con `{% comment %}` para evitar `NoReverseMatch` hasta integrar la vista de detalle).
 
 ## Prueba
 
-1. Asegurarse de tener datos cargados en la base de datos (`python3 manage.py loaddata datos_iniciales.json`) y favoritos asignados al usuario.
-2. Acceder en el navegador a:
+1. Asegurarse de tener cargados los datos de prueba (`python3 manage.py loaddata datos_iniciales.json`), que incluyen valoraciones con puntuación de accesibilidad igual o superior a 3.
+2. Acceder en el navegador desde el botón de inicio o directamente a:
 
-`http://127.0.0.1:8000/usuarios/elena_sub/favoritos/`
-
-*(Se puede sustituir `elena_sub` por cualquier otro `nombre_usuario` existente en la base de datos).*
+`http://127.0.0.1:8000/ranking-accesibilidad/`
 
 ## Fusión
 
 ```bash
 git add .
-git commit -m "Añadir listado y buscador de animes favoritos"
-git push -u origin URL_Animes-Favoritos
+git commit -m "Añadir ranking de accesibilidad"
+git push -u origin URL_Ranking-Accesibilidad
 
 git switch URLs
-git merge URL_Animes-Favoritos
+git merge URL_Ranking-Accesibilidad
 git push origin URLs
 ```
