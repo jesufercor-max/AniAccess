@@ -19,39 +19,44 @@ def index(request):
     return render(request, 'AniAccess/index.html')
 
 
-# Vista 9 Información de las colaboraciones 
-def detalle_colaboracion(request, id, estado):
+# Vista 10 Insignias de los voluntarios 
+def catalogo_insignias(request):
     """
-    Muestra la información completa de una colaboración,
-    identificándola mediante su ID y su estado.
+    Muestra las insignias activas y el número de voluntarios
+    que han conseguido cada una.
     """
 
     # QUERYSET ORM:
-    # Busca la colaboración por su identificador y estado.
-    # select_related carga el voluntario y el usuario asociado
-    # en la misma consulta mediante JOIN.
-    colaboracion = get_object_or_404(
-        Colaboracion.objects.select_related(
-            'voluntario__usuario'
-        ),
-        id=id,
-        estado=estado
+    # Filtra las insignias activas.
+    # Cuenta los voluntarios asociados mediante la relación ManyToMany.
+    # Carga también los voluntarios y sus usuarios.
+    insignias = Insignia.objects.filter(
+        activa=True
+    ).annotate(
+        total_voluntarios=Count(
+            'voluntarios',
+            distinct=True
+        )
+    ).prefetch_related(
+        'voluntarios__usuario'
+    ).order_by(
+        'puntos_necesarios'
     )
 
     # SQL RAW:
-    # colaboracion = Colaboracion.objects.raw(
-    #     "SELECT c.* "
-    #     "FROM AniAccess_colaboracion c "
-    #     "INNER JOIN AniAccess_voluntario v "
-    #     "ON v.id = c.voluntario_id "
-    #     "INNER JOIN AniAccess_usuario u "
-    #     "ON u.id = v.usuario_id "
-    #     "WHERE c.id = %s AND c.estado = %s",
-    #     [id, estado]
+    # insignias = Insignia.objects.raw(
+    #     "SELECT i.*, "
+    #     "COUNT(DISTINCT vi.voluntario_id) AS total_voluntarios "
+    #     "FROM AniAccess_insignia i "
+    #     "LEFT JOIN AniAccess_voluntario_insignias vi "
+    #     "ON vi.insignia_id = i.id "
+    #     "WHERE i.activa = 1 "
+    #     "GROUP BY i.id "
+    #     "ORDER BY i.puntos_necesarios"
     # )
 
     return render(
         request,
-        'AniAccess/detalle_colaboracion.html',
-        {'colaboracion': colaboracion}
+        'AniAccess/catalogo_insignias.html',
+        {'insignias': insignias}
     )

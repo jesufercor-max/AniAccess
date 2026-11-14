@@ -1,70 +1,65 @@
-# Rama 9 - Detalle de colaboración
+# Rama 10 - Catálogo de insignias
 
 ## Información general
 
-- **Nombre de la rama:** URL_Detalle-Colaboracion
-- **URL:** `/voluntariado/colaboraciones/<int:id>/<str:estado>/`
-- **Vista:** `detalle_colaboracion`
-- **Plantilla:** `detalle_colaboracion.html`
+- **Nombre de la rama:** URL_Catalogos-Insignias
+- **URL:** `/voluntariado/insignias/` (nombre de ruta: `catalogo_insignias`)
+- **Vista:** `catalogo_insignias`
+- **Plantilla:** `catalogo_insignias.html`
 
 ## Objetivo
 
-Mostrar la información completa de una colaboración concreta,
-incluyendo sus datos de gestión, fechas, puntos y la ficha del voluntario responsable.
+Mostrar el catálogo de insignias activas en la plataforma,
+indicando sus requisitos y los voluntarios que las han conseguido.
 
 ## QuerySet utilizado
 
-Se utiliza `Colaboracion.objects.select_related()` junto con `get_object_or_404()` filtrando por identificador y estado.
+Se utiliza `Insignia.objects.filter()` combinado con `annotate()` y `prefetch_related()`.
 
 ### Operaciones utilizadas
 
-- `get_object_or_404()`: busca la colaboración que coincida con ambos parámetros o devuelve un error `404`.
-- `select_related('voluntario__usuario')`: carga en la misma consulta el voluntario responsable y su cuenta de usuario mediante `INNER JOIN`.
-
-## Parámetros de la URL
-
-La ruta utiliza `path()` con convertidores de tipo y recibe dos parámetros dinámicos:
-
-- `<int:id>`: identificador numérico entero de la colaboración.
-- `<str:estado>`: cadena de texto con el estado de la colaboración (por ejemplo, `Aprobada` o `En proceso`).
+- `filter(activa=True)`: obtiene únicamente las insignias que se encuentran activas.
+- `Count('voluntarios', distinct=True)`: cuenta el número de voluntarios distintos que han obtenido cada insignia.
+- `annotate()`: añade el campo calculado `total_voluntarios` al resultado.
+- `prefetch_related('voluntarios__usuario')`: optimiza la carga de los voluntarios asociados y sus cuentas de usuario en la misma consulta.
+- `order_by('puntos_necesarios')`: ordena las insignias de menor a mayor dificultad según los puntos requeridos.
 
 ## SQL RAW
 
-Se incluye una consulta SQL equivalente con `INNER JOIN` a `AniAccess_voluntario` y `AniAccess_usuario`, y dos condiciones en el `WHERE` (`c.id = %s AND c.estado = %s`).
+Se incluye una consulta SQL equivalente con `LEFT JOIN` a la tabla intermedia `AniAccess_voluntario_insignias`,
+`COUNT(DISTINCT ...)`, `GROUP BY` y `ORDER BY`.
 Está comentada y no se ejecuta.
 
 ## Relaciones utilizadas
 
-- `Colaboracion` y `Voluntario`: `ManyToOne` mediante `ForeignKey`.
+- `Insignia` y `Voluntario`: relación inversa `ManyToMany` mediante `related_name="voluntarios"`.
 - `Voluntario` y `Usuario`: `OneToOne` mediante `OneToOneField`.
 
 ## Plantilla HTML
 
 Muestra:
 
-- Cabecera con título y descripción del trabajo.
-- Tarjeta de información de la colaboración (`info-card`): tipo, estado actual, `puntos_obtenidos`, `fecha_creacion`, `fecha_inicio`, `fecha_finalizacion` y `fecha_revision`.
-- Bloque condicional con `comentarios_revision` y enlace de descarga para `archivo_entrega` (si existen).
-- Tarjeta del voluntario responsable: nombre público, usuario asociado (`@nombre_usuario`), especialidad, disponibilidad, puntos totales y colaboraciones completadas.
-- Acceso directo desde la portada (`index.html`) hacia la colaboración de ejemplo `#1`.
+- Cabecera de sección y cuadrícula de tarjetas (`data-grid` y `badge-card`).
+- Icono de la insignia (o marcador visual `.badge-icon` si no tiene imagen subida).
+- Nombre y descripción del reconocimiento.
+- Requisitos de puntos (`puntos_necesarios`), colaboraciones (`colaboraciones_necesarias`) y total de voluntarios que la poseen (`total_voluntarios`).
+- Listado detallado de los voluntarios que han conseguido la insignia (`nombre_publico`, `@nombre_usuario`, `especialidad`, `puntos` y `colaboraciones_completadas`).
 
 ## Prueba
 
-1. Asegurarse de tener cargados los datos de prueba (`python3 manage.py loaddata datos_iniciales.json`).
-2. Acceder desde el botón de la portada o directamente en el navegador a:
+1. Asegurarse de tener cargados los datos de prueba (`python3 manage.py loaddata datos_iniciales.json`), que incluyen insignias activas y voluntarios asociados.
+2. Acceder desde el menú o el botón de inicio, o directamente en el navegador a:
 
-`http://127.0.0.1:8000/voluntariado/colaboraciones/1/Aprobada/`
-
-*(También se puede probar con la segunda colaboración del fixture: `http://127.0.0`).*
+`http://127.0.0`
 
 ## Fusión
 
 ```bash
 git add .
-git commit -m "Añadir detalle de colaboración"
-git push -u origin URL_Detalle-Colaboracion
+git commit -m "Añadir catálogo de insignias"
+git push -u origin URL_Catalogos-Insignias
 
 git switch URLs
-git merge URL_Detalle-Colaboracion
+git merge URL_Catalogos-Insignias
 git push origin URLs
 ```

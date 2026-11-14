@@ -1,0 +1,76 @@
+{% extends 'AniAccess/base.html' %}
+
+{% block title %}Insignias | AniAccess{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <span class="eyebrow">RECONOCIMIENTO A LA COMUNIDAD</span>
+    <h1>Catálogo de insignias</h1>
+    <p>
+        Descubre los reconocimientos que pueden conseguir
+        las personas voluntarias por su participación en AniAccess.
+    </p>
+</section>
+
+<div class="data-grid">
+
+    {% for insignia in insignias %}
+
+        <article class="badge-card">
+
+            {% if insignia.icono %}
+                <img src="{{ insignia.icono.url }}" alt="Icono de {{ insignia.nombre }}" style="max-width: 100px; max-height: 100px; object-fit: contain;">
+            {% else %}
+                <div class="badge-icon">★</div>
+            {% endif %}
+
+            <span class="badge">Insignia AniAccess</span>
+
+            <h2>{{ insignia.nombre }}</h2>
+
+            <p>{{ insignia.descripcion }}</p>
+
+            <div class="card-meta">
+                <span>{{ insignia.puntos_necesarios }} pts</span>
+                <span>{{ insignia.colaboraciones_necesarias }} colab.</span>
+                <span>{{ insignia.total_voluntarios }} voluntarios</span>
+            </div>
+
+            <div class="availability-item">
+                <strong>Activa:</strong>
+                <p>{{ insignia.activa|yesno:"Sí,No" }}</p>
+            </div>
+
+            <h3 style="margin-top: 20px;">Voluntarios que la han conseguido</h3>
+
+            {% for voluntario in insignia.voluntarios.all %}
+
+                <div class="availability-item">
+                    <strong>{{ voluntario.nombre_publico }}</strong>
+                    <p>Usuario: @{{ voluntario.usuario.nombre_usuario }}</p>
+                    <p>Especialidad: {{ voluntario.especialidad }}</p>
+                    <p>Puntos: {{ voluntario.puntos }}</p>
+                    <p>Colaboraciones completadas: {{ voluntario.colaboraciones_completadas }}</p>
+                </div>
+
+            {% empty %}
+
+                <p>Todavía ningún voluntario ha conseguido esta insignia.</p>
+
+            {% endfor %}
+
+        </article>
+
+    {% empty %}
+
+        <div class="empty-state">
+            <h2>Sin insignias disponibles</h2>
+            <p>No hay insignias activas en este momento.</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
