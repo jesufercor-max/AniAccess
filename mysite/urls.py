@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AniAccess.urls')),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 # Permite servir las imágenes subidas (media) en modo desarrollo (DEBUG = True)
